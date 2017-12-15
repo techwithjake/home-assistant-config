@@ -1,4 +1,4 @@
-bathroom_lights_dawn-dusk:
+bathroom_lights_dawn_dusk:
   sequence:
   - delay: 00:00:01
   - data:
