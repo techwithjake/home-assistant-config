@@ -1,0 +1,9 @@
+mike_arrived:
+  sequence:
+  - data:
+      message: Mike Is Home
+      target: arn:aws:sns:us-west-2:awsnotif:HASS2
+    service: notify.amazon_sns
+  - data:
+      message: Mike is Home. Changing Mode to Home.
+    service: notify.pixel_xl

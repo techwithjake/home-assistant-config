@@ -1,0 +1,13 @@
+bathroom_lights_day:
+  sequence:
+  - delay: 00:00:01
+  - data:
+      entity_id:
+      - light.bathroom_center
+      - light.bathroom_left
+      - light.bathroom_right
+      rgb_color:
+      - 252
+      - 255
+      - 252
+    service: light.turn_on

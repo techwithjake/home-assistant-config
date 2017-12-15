@@ -1,0 +1,14 @@
+bathroom_lights_dawn-dusk:
+  sequence:
+  - delay: 00:00:01
+  - data:
+      brightness_pct: '20'
+      entity_id:
+      - light.bathroom_center
+      - light.bathroom_left
+      - light.bathroom_right
+      rgb_color:
+      - 255
+      - 141
+      - 124
+    service: light.turn_on

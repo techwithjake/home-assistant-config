@@ -1,0 +1,19 @@
+watch_roku_on:
+  sequence:
+  - data:
+      entity_id:
+      - input_boolean.watch_chromecast
+      - input_boolean.watch_netflix
+      - input_boolean.listen_to_music
+    service: input_boolean.turn_off
+  - data:
+      entity_id: input_boolean.watch_roku
+    service: input_boolean.turn_on
+  - data:
+      activity: Watch Roku
+      entity_id: remote.harmony_hub
+    service: remote.turn_on
+  - data:
+      entity_id: input_select.harmony_hub_activities
+      option: Watch Roku
+    service: input_select.select_option

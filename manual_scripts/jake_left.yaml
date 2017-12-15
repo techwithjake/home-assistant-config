@@ -1,0 +1,16 @@
+jake_left:
+  sequence:
+  - data:
+      entity_id:
+      - switch.bedroom_light_switch_switch
+      - fan.bedroom_fan_switch_level
+      - switch.bedroom_tv_outlet
+      - switch.bedroom_fan_outlet
+    service: homeassistant.turn_off
+  - data:
+      activity: PowerOff
+      entity_id: remote.harmony_hub
+    service: remote.turn_on
+  - data:
+      message: You've Left. Turning Off Your Things.
+    service: notify.pixel_xl

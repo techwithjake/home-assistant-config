@@ -1,0 +1,9 @@
+mike_left:
+  sequence:
+  - data:
+      message: Mike Left
+    service: notify.pixel_xl
+  - data:
+      message: Mike Left
+      target: arn:aws:sns:us-west-2:awsnotif:HASS2
+    service: notify.amazon_sns

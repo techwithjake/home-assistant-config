@@ -1,0 +1,6 @@
+toggle_hotplate:
+  sequence:
+  - delay: 00:20:00
+  - data:
+      entity_id: switch.hotplate_switch
+    service: switch.turn_off

@@ -1,0 +1,12 @@
+home:
+  sequence:
+  - data:
+      entity_id: lock.front_door_lock_locked
+    service: lock.unlock
+  - data:
+      entity_id: input_select.mode
+      option: Home
+    service: input_select.select_option
+  - data:
+      event: someone_arrived
+    service: ifttt.trigger

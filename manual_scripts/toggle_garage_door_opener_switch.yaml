@@ -1,0 +1,6 @@
+toggle_garage_door_opener_switch:
+  sequence:
+  - delay: 00:00:01
+  - data:
+      entity_id: switch.garage_door_opener_switch
+    service: switch.turn_off
