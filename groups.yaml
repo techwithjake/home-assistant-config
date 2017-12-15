@@ -1,0 +1,455 @@
+default_view:
+  view: yes
+  entities:
+    - group.alarm_panel_group
+    - group.bedroom_home_group
+    - group.bathroom_home_group
+    - group.garage_home_group
+    - group.front_door_home_group
+    - group.outside_home_group
+    - group.thermostat_home_group
+    - group.time_and_weather_home_group
+
+##############################################
+################### Views ####################
+##############################################
+
+###############
+### Bedroom ###
+###############
+Bedroom View:
+  name: Bedroom
+  view: yes
+  entities:
+    - group.bedroom_lights_group
+    - group.bedroom_fan_group
+    - group.bedroom_switches_group
+    - group.bedroom_sensors_group
+    - group.google_maps_group
+    - group.bedroom_chromecasts_group
+    - group.harmony_hub_group
+
+##################
+### Front Door ###
+##################
+Front Door View:
+  name: Front Door
+  view: yes
+  entities:
+    - lock.front_door_lock_locked
+    - switch.front_door_light_switch_switch
+    - group.front_door_sensors_group
+
+################
+### Bathroom ###
+################
+Bathroom View:
+  name: Bathroom
+  view: yes
+  entities:
+    - group.bathroom_lights_group
+    - group.bathroom_fan_group
+    - group.bathroom_sensors_group
+
+###############
+### Outside ###
+###############
+Outside View:
+  name: Outside
+  view: yes
+  entities:
+    - group.outside_switches_group
+    - group.outside_sensors_group
+
+###################
+### Chromecasts ###
+###################
+Chromecasts View:
+  name: Chromecasts
+  view: yes
+  entities:
+    - group.bedroom_chromecasts_group
+    - media_player.bathroom
+    - media_player.jakes_speakers
+    - media_player.living_space
+    - media_player.livingroom_home
+    - media_player.whole_house
+
+###############
+### Cameras ###
+###############
+Cameras View:
+  name: Cameras
+  view: yes
+  entities:
+    - group.cameras_group
+
+#################
+### Presences ###
+#################
+Presence View:
+  name: Presence
+  view: yes
+  entities:
+    - group.mode_is_group
+    - group.jakes_presence_group
+    - group.megans_presence_group
+    - group.lydias_presence_group
+    - group.mikes_presence_group
+
+###################
+### Automations ###
+###################
+Automations View:
+  name: Automations
+  view: yes
+  entities:
+    - group.all_automations
+
+##############
+### Server ###
+##############
+Server View:
+  name: Server
+  view: yes
+  entities:
+    - group.server_group
+    - group.wifi_group
+    - group.internet_speed_group
+    - group.pihole_group
+    - group.deitpi_services_group
+
+#################
+### Batteries ###
+#################
+Battery View:
+  name: Battery Levels
+  view: yes
+  entities:
+    - group.bedroom_batteries_group
+
+########################################
+########### Groups #####################
+########################################
+
+########################################
+########## Home Page Groups ############
+########################################
+
+#############################
+### Alarm Panel Home Page ###
+#############################
+Alarm Panel Group:
+  name: Alarm Panel
+  entities:
+    - alarm_control_panel.alarm_panel
+    - binary_sensor.alarm_panel_motion
+    - switch.aeotec_siren_switch
+
+#########################
+### Bedroom Home Page ###
+#########################
+Bedroom Home Group:
+  name: Bedroom
+  entities:
+    - switch.bedroom_light_switch_switch
+    - fan.bedroom_fan_switch_level
+    - binary_sensor.bedroom_door
+    - binary_sensor.bedroom_window
+    - binary_sensor.bedroom_motion
+
+##########################
+### Bathroom Home Page ###
+##########################
+Bathroom Home Group:
+  name: Bathroom
+  entities:
+    - switch.bathroom_light_switch_switch
+    - switch.bathroom_fan_switch_switch
+    - binary_sensor.bathroom_door
+    - binary_sensor.bathroom_motion
+
+########################
+### Garage Home Page ###
+########################
+Garage Home Group:
+  name: Garage
+  entities:
+    - cover.garage_door
+    - binary_sensor.garage_door_sensor
+    - switch.garage_door_opener_switch
+
+############################
+### Front Door Home Page ###
+############################
+Front Door Home Group:
+  name: Front Door
+  control: hidden
+  entities:
+    - binary_sensor.front_door
+    - lock.front_door_lock_locked
+    - switch.front_door_light_switch_switch
+    - binary_sensor.ring_front_door_ding
+
+#########################
+### Outside Home Page ###
+#########################
+Outside Home Group:
+  name: Outside
+  entities:
+    - switch.driveway_light_switch_switch
+    - switch.hotplate_switch
+    - binary_sensor.back_sliding_door
+    - binary_sensor.backyard_motion
+    - binary_sensor.driveway_motion
+
+############################
+### Thermostat Home Page ###
+############################
+Thermostat Home Group:
+  name: Thermostat
+  entities:
+    - sensor.thermostat_temperature
+    - climate.thermostat_cooling_1
+    - climate.thermostat_heating_1
+    - input_select.thermostat_operation_mode
+    - input_select.theromstat_fan_mode
+    - input_slider.thermostat_target_temp
+
+################################
+### Time & Weather Home Page ###
+################################
+Time and Weather Home Group:
+  name: Time & Weather
+  entities:
+    - sensor.time
+    - sensor.date
+    - sensor.internet_time
+    - sensor.dark_sky_summary
+    - sensor.dark_sky_temperature
+    - sun.sun
+    - sensor.moon
+
+####################################################
+############## Internal Groups #####################
+####################################################
+
+###############################
+### Bedroom Internal Groups ###
+###############################
+Bedroom Lights Group:
+  name: Lights
+  entities:
+    - light.bedroom_lights
+    - switch.bedroom_light_switch_switch
+    - light.bed_bulb
+    - light.nightstand_bulb
+    - light.desk_bulb
+    - light.window_bulb
+    - light.light
+Bedroom Fan Group:
+  name: Fan
+  entities:
+    - fan.bedroom_fan_switch_level
+Bedroom Switches Group:
+  name: Switches
+  entities:
+    - switch.bedroom_tv_outlet
+    - switch.bedroom_fan_outlet
+Bedroom Sensors Group:
+  name: Sensors
+  entities:
+    - sensor.bedroom_temp
+    - binary_sensor.bedroom_door
+    - sensor.bedroom_door_temp
+    - binary_sensor.bedroom_window
+    - sensor.bedroom_window_temp
+    - binary_sensor.bedroom_motion
+    - sensor.bedroom_motion_temp
+    - binary_sensor.esp_motion
+Bedroom Chromecasts Group:
+  name: Chromecasts
+  entities:
+    - media_player.bedroom_home
+    - media_player.bedroom_tv
+#    - media_player.bedroom_roku
+    - media_player.bedroom_speakers
+Google Maps Group:
+  name: Google Maps
+  entities:
+    - sensor.time_to_work
+Harmony Hub Group:
+  name: Harmony Hub
+  entities:
+    - input_select.harmony_hub_activities
+
+##################################
+### Front Door Internal Groups ###
+##################################
+Front Door Sensors Group:
+  name: Front Door
+  entities:
+    - binary_sensor.front_door
+    - binary_sensor.ring_front_door_ding
+    - sensor.ring_front_door_last_ding
+    - binary_sensor.ring_front_door_motion
+    - sensor.ring_front_door_last_motion
+
+################################
+### Bathroom Internal Groups ###
+################################
+Bathroom Lights Group:
+  name: Lights
+  entities:
+    - switch.bathroom_light_switch_switch
+    - light.bathroom_left
+    - light.bathroom_center
+    - light.bathroom_right
+Bathroom Fan Group:
+  name: Fan
+  entities:
+    - switch.bathroom_fan_switch_switch
+Bathroom Sensors Group:
+  name: Sensors
+  entities:
+    - binary_sensor.bathroom_door
+    - binary_sensor.bathroom_motion
+    - sensor.bathroom_humidity
+
+###############################
+### Outside Internal Groups ###
+###############################
+Outside Switches Group:
+  name: Switches
+  entities:
+    - switch.driveway_light_switch_switch
+    - switch.hotplate_switch
+Outside Sensors Group:
+  name: Sensors
+  entities:
+    - binary_sensor.back_sliding_door
+    - binary_sensor.backyard_motion
+    - binary_sensor.driveway_motion
+
+###############################
+### Cameras Internal Groups ###
+###############################
+Cameras Group:
+  name: Cameras
+  entities:
+    - sensor.last_driveway
+    - camera.driveway
+    - sensor.last_backyard
+    - camera.backyard
+    - sensor.last_upstairs
+    - camera.upstairs
+    - camera.living_room
+    - camera.alarm_panel
+    - camera.front_door
+    - camera.yi_camera
+
+##############################
+### Server Internal Groups ###
+##############################
+Server Group:
+  name: Server
+  entities:
+    - sensor.cpu_use
+    - sensor.ram_free
+    - sensor.average_load_1m
+    - sensor.disk_free_mnte04c2c951c1c4c52b0c9feb72f3e0412
+WiFi Group:
+  name: WiFi
+  entities:
+    - sensor.google_wifi_status
+    - sensor.google_wifi_local_ip
+Internet Speed Group:
+  name: Internet Speed
+  entities:
+    - sensor.fastcom_download
+PiHole Group:
+  name: Pi-Hole
+  entities:
+    - sensor.pihole_dns_queries_today
+    - sensor.pihole_ads_blocked_today
+DeitPi Services Group:
+  name: DeitPi Services
+  entities:
+    - switch.dietpi_services
+
+############################################
+### Input Selection Mode Internal Groups ###
+############################################
+Mode IS Group:
+  name: Mode Selection
+  entities:
+    - input_select.mode
+
+################################
+### Presence Internal Groups ###
+################################
+Jakes Presence Group:
+  name: Jake
+  entities:
+#    - binary_sensor.jake
+#    - device_tracker.tile_wallet
+#    - device_tracker.jake2
+#    - device_tracker.jakes_ping
+#    - device_tracker.pixel_xl_pixelxl
+    - binary_sensor.jakes_home
+    - input_boolean.jake_presence
+    - sensor.jakes_location
+Megans Presence Group:
+  name: Megans
+  entities:
+#    - device_tracker.megan2
+#    - device_tracker.megans_ping
+#    - device_tracker.tile_purse
+    - binary_sensor.megans_home
+    - input_boolean.megan_presence
+Lydias Presence Group:
+  name: Lydia
+  entities:
+#    - binary_sensor.lydia
+#    - device_tracker.lydia2
+#    - device_tracker.lydias_ping
+    - binary_sensor.lydias_home
+    - input_boolean.lydia_presence
+Mikes Presence Group:
+  name: Mike
+  entities:
+#    - binary_sensor.mike
+#    - device_tracker.mike2
+#    - device_tracker.mikes_ping
+    - binary_sensor.mikes_home
+    - input_boolean.mike_presence
+
+###############################
+### Battery Internal Groups ###
+###############################
+Bedroom Batteries Group:
+  name: Bedroom Batteries
+  entities:
+    - sensor.bedroom_door_battery
+
+#########################
+#### Everything Group ###
+#########################
+Everything:
+   name: Everything
+   entities:
+    - light.bathroom_center
+    - light.bathroom_left
+    - light.bathroom_right
+    - light.bed_bulb
+    - fan.bedroom_fan_switch_level
+    - switch.bedroom_fan_outlet
+    - light.desk_bulb
+    - light.kitchen_bulb
+    - light.nightstand_bulb
+    - light.window_bulb
+    - switch.bathroom_fan_switch_switch
+    - switch.bathroom_light_switch_switch
+    - switch.bedroom_light_switch_switch
+    - switch.hotplate
+    - switch.curling_iron

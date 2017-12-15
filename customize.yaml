@@ -1,0 +1,119 @@
+sensor.last_backyard:
+  friendly_name: Last Backyard Recording
+sensor.last_upstairs:
+  friendly_name: Last Upstairs Recording
+sensor.last_driveway:
+  friendly_name: Last Driveway Recording
+sensor.dark_sky_summary:
+  friendly_name: Weather Summary
+sensor.dark_sky_temperature:
+  friendly_name: Weather Temperature
+sun.sun:
+  friendly_name: Sun Placement
+sensor.ring_front_door_last_ding:
+  friendly_name: Last Front Door Ding
+sensor.ring_front_door_last_motion:
+  friendly_name: Last Front Door Motion
+sensor.disk_free_mnte04c2c951c1c4c52b0c9feb72f3e0412:
+  friendly_name: Free External Disk Space
+switch.bathroom_fan_switch:
+  icon: mdi:fan
+cover.garage_door:
+  device_class: garage
+  google_assistant: false
+sensor.pihole_dns_queries_today:
+  icon: mdi:cloud-upload
+switch.bedroom_light_switch_switch:
+  icon: mdi:ceiling-light
+  friendly_name: Bedroom Light Switch
+switch.bathroom_light_switch:
+  icon: mdi:ceiling-light
+sensor.bedroom_door_temp:
+  icon: mdi:thermometer
+switch.aeotec_siren_switch:
+  google_assistant: false
+  friendly_name: Aeotec Siren
+fan.bedroom_fan_switch_level:
+  friendly_name: Bedroom Fan Switch
+climate.thermostat_cooling_1:
+  friendly_name: Thermostat Cooling
+climate.thermostat_heating_1:
+  friendly_name: Thermostat Heating
+switch.bathroom_light_switch_switch:
+  friendly_name: Bathroom Light Switch
+  icon: mdi:ceiling-light
+group.all_automations:
+  hidden: false
+sensor.bedroom_door_battery:
+  icon: mdi:battery
+lock.front_door_lock_locked:
+  friendly_name: Front Door Lock
+switch.front_door_light_switch_switch:
+  friendly_name: Front Door Light Switch
+  icon: mdi:spotlight-beam
+switch.driveway_light_switch_switch:
+  friendly_name: Driveway Light Switch
+  icon: mdi:spotlight-beam
+switch.bedroom_tv_outlet:
+  icon: mdi:power-socket-us
+sensor.bathroom_humidity:
+  icon: mdi:water-percent
+binary_sensor.visonic_mct340:
+  friendly_name: Front Door
+device_tracker.bdii:
+  friendly_name: BDII
+switch.hotplate_switch:
+  friendly_name: Hotplate
+  icon: mdi:vanish
+switch.bathroom_fan_switch_switch:
+  friendly_name: Bathroom Fan Switch
+  icon: mdi:fan
+switch.garage_door_opener_switch:
+  google_assistant: false
+  icon: mdi:garage
+binary_sensor.garage_door:
+  icon: mdi:garage
+device_tracker.jakes_ping:
+  friendly_name: Jake's Ping
+device_tracker.lydias_ping:
+  friendly_name: Lydia's Ping
+device_tracker.mikes_ping:
+  friendly_name: Mike's Ping
+sensor.bedroom_temp:
+  icon: mdi:thermometer
+binary_sensor.garage_door_sensor:
+  device_class: opening
+switch.bedroom_fan_outlet:
+  icon: mdi:power-socket-us
+light.5ccf7f2a183e_19216886136:
+  friendly_name: Light Strip
+light.fortrezz_siren_level:
+  google_assistant: false
+input_boolean.jake_presence:
+  google_assistant: false
+input_boolean.lydia_presence:
+  google_assistant: false
+input_boolean.mike_presence:
+  google_assistant: false
+input_boolean.megan_presence:
+  google_assistant: false
+input_boolean.watch_chromecast:
+  google_assistant: true
+device_tracker.tile_wallet:
+  friendly_name: Jake's Wallet
+binary_sensor.jakes_home:
+  device_class: occupancy
+binary_sensor.lydias_home:
+  device_class: occupancy
+binary_sensor.mikes_home:
+  device_class: occupancy
+device_tracker.tile_purse:
+  friendly_name: Megan's Purse
+device_tracker.megans_ping:
+  friendly_name: Megan's Ping
+binary_sensor.megans_home:
+  device_class: occupancy
+device_tracker.lydia2:
+  friendly_name: Lydia's Phone
+device_tracker.lydia2:
+  friendly_name: Lydia's Phone

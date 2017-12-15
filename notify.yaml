@@ -1,0 +1,45 @@
+### Join App Notify APIs ###
+  - platform: joaoapps_join
+    api_key: !secret join_api
+    device_id: !secret pixel_xl
+    device_name: Pixel XL
+    name: pixel_xl
+
+### Discord ###
+  - platform: discord
+    name: discord
+    token: !secret discord_token
+
+### Twilio ###
+  - platform: twilio_sms
+    name: twilio_sms
+    from_number: +15555555555
+
+### HTML5 Push ###
+  - platform: html5
+    name: html5
+    gcm_api_key: !secret gcm_key
+    gcm_sender_id: !secret gcm_id
+
+### Amazon SNS ###
+  - platform: aws_sns
+    name: amazon_sns
+    aws_access_key_id: !secret aws_id
+    aws_secret_access_key: !secret aws_key
+    region_name: 'us-west-2'
+
+### Telegram ###
+  - platform: telegram
+    name: telegram
+    chat_id: 1234567890
+
+### Pushbullet ###
+  - platform: pushbullet
+    name: pushbullet
+    api_key: !secret pushbullet_api_key
+
+### Pushover ###
+  - platform: pushover
+    name: pushover
+    api_key: !secret pushover_app_api
+    user_key: !secret pushover_user_key

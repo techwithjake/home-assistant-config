@@ -1,0 +1,6 @@
+  thermostat_target_temp:
+    name: 'Set Target Temp'
+    min: 45
+    max: 90
+    step: 1
+#    initial: 76

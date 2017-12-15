@@ -1,0 +1,40 @@
+  mode:
+    name: Current Mode
+    options:
+     - Home
+     - Morning
+     - Evening
+     - Night
+     - Away
+    initial: Home
+    icon: mdi:home-assistant
+
+  thermostat_operation_mode:
+    name: Thermostat Operation Mode
+    options:
+     - Cool
+     - Heat
+     - Aux Heat
+     - Auto
+     - Off
+#    initial: Auto
+    icon: mdi:nest-thermostat
+
+  theromstat_fan_mode:
+    name: Thermostat Fan Mode
+    options:
+     - Auto Low
+     - On Low
+#    initial: Auto Low
+    icon: mdi:fan
+
+  harmony_hub_activities:
+    name: Harmony Activity
+    options:
+     - Power Off
+     - Watch Chromecast
+     - Watch Roku
+     - Watch Netflix
+     - Listen to Music
+    initial: Power Off
+    icon: mdi:remote

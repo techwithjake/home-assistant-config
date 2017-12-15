@@ -1,0 +1,4 @@
+#  - name: Presence
+#    sidebar_title: Presence
+#    sidebar_icon: mdi:account
+#    url_path: http://your.webiste.com:8123/states/group.presence_view

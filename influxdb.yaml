@@ -1,0 +1,5 @@
+  host: !secret host_ip
+  port: 8086
+  database: home_assistant
+  username: !secret influxdb_user
+  password: !secret influxdb_password

@@ -1,0 +1,250 @@
+############
+### Ring ###
+############
+  - platform: ring
+    monitored_conditions:
+#      - ding
+      - motion
+
+#######################
+### Contact Sensors ###
+#######################
+  - platform: mqtt
+    name: "Bedroom Door"
+    state_topic: "smartthings/Bedroom Door/contact"
+    device_class: opening
+    payload_on: "open"
+    payload_off: "closed"
+    optimistic: true
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Bedroom Window"
+    state_topic: "smartthings/Bedroom Window/contact"
+    device_class: opening
+    payload_on: "open"
+    payload_off: "closed"
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Front Door"
+    state_topic: "smartthings/Front Door/contact"
+    device_class: opening
+    payload_on: "open"
+    payload_off: "closed"
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Back Sliding Door"
+    state_topic: "smartthings/Back Sliding Door/contact"
+    device_class: opening
+    payload_on: "open"
+    payload_off: "closed"
+    retain: true
+    qos: 1
+#  - platform: mqtt
+#    name: "Garage Door"
+#    state_topic: "smartthings/Garage Door/contact"
+#    device_class: opening
+#    payload_on: "open"
+#    payload_off: "closed"
+#    retain: true
+#    optimistic: false
+  - platform: mqtt
+    name: "Bathroom Door"
+    state_topic: "smartthings/Bathroom Door/contact"
+    device_class: opening
+    payload_on: "open"
+    payload_off: "closed"
+    retain: true
+    qos: 1
+
+######################
+### Motion Sensors ###
+######################
+  - platform: mqtt
+    name: "Bedroom Motion"
+    state_topic: "smartthings/Bedroom Motion/motion"
+    device_class: motion
+    payload_on: "active"
+    payload_off: "inactive"
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Bathroom Motion"
+    state_topic: "smartthings/Bathroom Hue Motion/motion"
+    device_class: motion
+    payload_on: "active"
+    payload_off: "inactive"
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Backyard Motion"
+    state_topic: "smartthings/Backyard Camera/motion"
+    device_class: motion
+    payload_on: "active"
+    payload_off: "inactive"
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Upstairs Motion"
+    state_topic: "smartthings/Upstairs Camera/motion"
+    device_class: motion
+    payload_on: "active"
+    payload_off: "inactive"
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Driveway Motion"
+    state_topic: "smartthings/Driveway Camera/motion"
+    device_class: motion
+    payload_on: "active"
+    payload_off: "inactive"
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "ESP Motion"
+    state_topic: "esp_motion_0/feeds/motion"
+    device_class: motion
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "SmartCam Motion"
+    state_topic: "home/smartcam_motion/motion"
+    payload_on: "ON"
+    payload_off: "OFF"
+    device_class: motion
+    qos: 1
+    retain: true
+  - platform: mqtt
+    name: "Alarm Panel Motion"
+    state_topic: "home/alarm_panel_motion/motion"
+    payload_on: "ON"
+    payload_off: "OFF"
+    device_class: motion
+    qos: 1
+    retain: true
+
+########################
+### Presence Sensors ###
+########################
+  - platform: mqtt
+    name: "Jake"
+    state_topic: "smartthings/Jake/presence"
+    payload_on: 'present'
+    payload_off: 'not present'
+    device_class: occupancy
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Mike"
+    state_topic: "smartthings/Mike/presence"
+    payload_on: 'present'
+    payload_off: 'not present'
+    device_class: occupancy
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Lydia"
+    state_topic: "smartthings/Lydia/presence"
+    payload_on: 'present'
+    payload_off: 'not present'
+    device_class: occupancy
+    retain: 1
+    qos: 1
+
+########################
+### Bayesian Sensors ###
+########################
+  - platform: bayesian
+    name: Jake's Home
+    prior: 0.2
+    probability_threshold: 0.75
+    observations:
+      - entity_id: 'binary_sensor.jake'
+        prob_given_true: 0.7
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'on'
+      - entity_id: 'device_tracker.tile_wallet'
+        prob_given_true: 0.7
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: 'device_tracker.jake2'
+        prob_given_true: 0.7
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: 'device_tracker.jakes_ping'
+        prob_given_true: 0.7
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: 'device_tracker.pixel_xl_pixelxl'
+        prob_given_true: 0.7
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'home'
+  - platform: bayesian
+    name: Lydia's Home
+    prior: 0.2
+    probability_threshold: 0.75
+    observations:
+      - entity_id: 'binary_sensor.lydia'
+        prob_given_true: 0.7
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'on'
+      - entity_id: 'device_tracker.lydia2'
+        prob_given_true: 0.7
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: 'device_tracker.lydias_ping'
+        prob_given_true: 0.7
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'home'
+  - platform: bayesian
+    name: Mike's Home
+    prior: 0.2
+    probability_threshold: 0.75
+    observations:
+      - entity_id: 'binary_sensor.mike'
+        prob_given_true: 0.7
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'on'
+      - entity_id: 'device_tracker.mike2'
+        prob_given_true: 0.7
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: 'device_tracker.mikes_ping'
+        prob_given_true: 0.7
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'home'
+  - platform: bayesian
+    name: Megan's Home
+    prior: 0.2
+    probability_threshold: 0.75
+    observations:
+      - entity_id: 'device_tracker.megan2'
+        prob_given_true: 0.7
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: 'device_tracker.megans_ping'
+        prob_given_true: 0.7
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: 'device_tracker.tile_purse'
+        prob_given_true: 0.7
+        prob_given_false: 0.2
+        platform: 'state'
+        to_state: 'home'

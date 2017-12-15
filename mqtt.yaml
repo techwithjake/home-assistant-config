@@ -1,0 +1,17 @@
+  broker: !secret host_ip
+  port: 1883
+#  certificate: !secret mqtt_cert
+#  client_cert: !secret mqtt_client_cert
+#  client_key: !secret mqtt_client_key
+  keepalive: 60
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  client_id: hass_master
+  discovery: true
+  discovery_prefix: hass
+  birth_message:
+    topic: 'hass_master/status'
+    payload: 'online'
+  will_message:
+    topic: 'hass_master/status'
+    payload: 'offline'

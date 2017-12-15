@@ -1,0 +1,351 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret home_lat
+  longitude: !secret home_long
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret home_elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Phoenix
+
+  # Customize Devices
+  customize: !include customize.yaml
+
+###################################################
+### Show links to resources in log and frontend ###
+###################################################
+#introduction:
+
+# Enables the frontend
+frontend:
+  javascript_version: latest
+
+# Enables configuration UI
+config:
+
+http:
+  # Uncomment this to add a password (recommended!)
+  api_password: !secret http_password
+  # Uncomment this if you are using SSL or running in Docker etc
+  ssl_certificate: !secret ssl_certificate
+  ssl_key: !secret ssl_key
+  base_url: !secret base_url
+  # server_host: !secret host_ip
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
+
+# Duck DNS
+duckdns:
+  domain: !secret duckdns_domain
+  access_token: !secret duckdns_token
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+###########################################
+### Discover some devices automatically ###
+###########################################
+discovery:
+  ignore:
+    - samsung_tv
+    - roku
+
+################################################################################
+### Allows you to issue voice commands from the frontend in enabled browsers ###
+################################################################################
+conversation:
+
+##########################################
+### Recorder - Enables storing details ###
+##########################################
+recorder:
+  purge_interval: 7
+  purge_keep_days: 10
+
+#############################################################
+### Enables support for tracking state changes over time ###
+#############################################################
+history:
+
+####################################
+### View all events in a logbook ###
+####################################
+logbook:
+
+################
+### Show Map ###
+################
+map:
+
+#####################
+### Track the sun ###
+#####################
+sun:
+
+######################
+### Text to speech ###
+######################
+tts:
+  platform: google
+
+########################
+### Downloader Setup ###
+########################
+downloader:
+  download_dir: /mnt/e04c2c95-1c1c-4c52-b0c9-feb72f3e0412/dietpi_userdata/homeassistant/downloads
+
+####################
+### FFMPEG Setup ###
+####################
+ffmpeg:
+  ffmpeg_bin: /usr/bin/ffmpeg
+  run_test: true
+
+###########################
+### IFTTT Maker API Key ###
+###########################
+ifttt:
+  key: !secret ifttt_key
+
+#################################
+### Notification Devices List ###
+#################################
+notify: !include notify.yaml
+
+##################
+### Ring Login ###
+##################
+ring:
+  username: !secret ring_username
+  password: !secret ring_password
+
+##################
+### Arlo Login ###
+##################
+arlo:
+  username: !secret arlo_username
+  password: !secret arlo_password
+
+#####################
+### Twilio Tokens ###
+#####################
+twilio:
+  account_sid: !secret twilio_account
+  auth_token: !secret twilio_token
+
+##############
+### Groups ###
+##############
+group: !include groups.yaml
+
+###################
+### Automations ###
+###################
+automation: !include automations.yaml
+
+###############
+### Scripts ###
+###############
+script: !include scripts.yaml
+
+##############
+### Scenes ###
+##############
+scene: !include scenes.yaml
+
+##################
+### MQTT Setup ###
+##################
+mqtt: !include mqtt.yaml
+
+######################
+### Switches List ###
+switch: !include switches.yaml
+
+###################
+### Lights List ###
+###################
+light: !include lights.yaml
+
+############################
+### Device Trackers List ###
+############################
+device_tracker: !include device_trackers.yaml
+
+####################
+### Sensors List ###
+####################
+sensor: !include sensors.yaml
+
+###########################
+### Binary Sensors List ###
+###########################
+binary_sensor: !include binary_sensors.yaml
+
+##################
+### Locks List ###
+##################
+lock: !include locks.yaml
+
+#########################################
+### Garage Door and other Covers List ###
+#########################################
+cover: !include covers.yaml
+
+####################
+### Cameras List ###
+####################
+camera: !include cameras.yaml
+
+#################
+### Fans List ###
+#################
+fan: !include fans.yaml
+
+#############################
+### Input Selections List ###
+#############################
+input_select: !include input_selections.yaml
+
+##########################
+### Input Numbers List ###
+##########################
+input_number: !include input_numbers.yaml
+
+###########################
+### Input Booleans List ###
+###########################
+input_boolean: !include input_booleans.yaml
+
+####################
+### Remotes List ###
+####################
+remote: !include remotes.yaml
+
+##############################
+### ZigBee Home Automation ###
+##############################
+#zha:
+#  usb_path: /dev/ttyUSB1
+#  database_path: /home/homeassistant/.homeassistant/zigbee.db
+
+##############
+### Z-Wave ###
+##############
+zwave:
+  usb_path: /dev/ttyUSB0
+  network_key: !secret zwave_key
+  polling_interval: 60000
+  debug: no
+  new_entity_ids: true
+
+####################
+### Emulated Hue ###
+####################
+#emulated_hue:
+#  type: google_home
+#  host_ip: !secret host_ip
+#  listen_port: 80
+#  expose_by_default: true
+#  exposed_domains:
+#   - light
+#   - switch
+#   - fan
+#   - input_boolean
+#emulated_hue 1:
+#  type: alexa
+#  host_ip: !secret host_ip
+#  expose_by_default: true
+#  exposed_domains:
+#   - light
+#   - switch
+#   - fan
+#   - inpu_boolean
+
+##################
+### Dialogflow ###
+##################
+dialogflow:
+
+#####################
+### Intent Script ###
+#####################
+intent_script: !include intents.yaml
+
+##########################
+### Panel Customs List ###
+##########################
+#panel_custom: !include panel_customs.yaml
+
+##########################
+### Panel iFrames List ###
+###########################
+panel_iframe: !include panel_iframes.yaml
+
+#####################
+### Weblinks List ###
+#####################
+#weblink: !include weblinks.yaml
+
+###################
+### Alarm Panel ###
+###################
+alarm_control_panel: !include alarm_panels.yaml
+
+#########################
+### Android IP Webcam ###
+#########################
+#android_ip_webcam: !include android_ip_webcams.yaml
+
+##############
+### Alerts ###
+##############
+alert: !include alerts.yaml
+
+################
+### InfluxDB ###
+################
+#influxdb: !include influxdb.yaml
+
+####################
+### Telegram Bot ###
+####################
+telegram_bot: !include telegram_bot.yaml
+
+########################
+### Google Assistant ###
+########################
+google_assistant:
+  project_id: !secret ga_project_id
+  client_id: !secret ga_client_id
+  access_token: !secret ga_access_token
+  api_key: !secret ga_api_key
+  exposed_domains:
+   - light
+   - switch
+   - fan
+   - input_boolean
+  expose_by_default: true
+
+######################
+### Python Scripts ###
+######################
+#python_script:
+
+######################
+### Google Domains ###
+######################
+google_domains:
+  domain: !secret g_domains_domain
+  username: !secret g_domains_username
+  password: !secret g_domains_password
+  timeout: 30

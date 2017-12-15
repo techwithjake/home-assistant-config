@@ -1,0 +1,51 @@
+  - platform: mqtt
+    name: "Bed Bulb"
+    state_topic: "smartthings/Bed Bulb/switch"
+    command_topic: "smartthings/Bed Bulb/switch"
+    brightness_state_topic: "smartthings/Bed Bulb/level"
+    brightness_command_topic: "smartthings/Bed Bulb/level"
+#    color_temp_command_topic: "smartthings/Bed Bulb/colorTemperature"
+#    color_temp_state_topic: "smartthings/Bed Bulb/colorTemperature"
+#    rgb_state_topic: "smartthings/Bed Bulb/color"
+#    rgb_command_topic: "smartthings/Bed Bulb/color"
+    payload_on: "on"
+    payload_off: "off"
+    brightness_scale: 100
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Window Bulb"
+    state_topic: "smartthings/Window Bulb/switch"
+    command_topic: "smartthings/Window Bulb/switch"
+    brightness_state_topic: "smartthings/Window Bulb/level"
+    brightness_command_topic: "smartthings/Window Bulb/level"
+    payload_on: "on"
+    payload_off: "off"
+    brightness_scale: 100
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Desk Bulb"
+    state_topic: "smartthings/Desk Bulb/switch"
+    command_topic: "smartthings/Desk Bulb/switch"
+    brightness_state_topic: "smartthings/Desk Bulb/level"
+    brightness_command_topic: "smartthings/Desk Bulb/level"
+    payload_on: "on"
+    payload_off: "off"
+    brightness_scale: 100
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Nightstand Bulb"
+    state_topic: "smartthings/Nightstand Bulb/switch"
+    command_topic: "smartthings/Nightstand Bulb/switch"
+    brightness_state_topic: "smartthings/Nightstand Bulb/level"
+    brightness_command_topic: "smartthings/Nightstand Bulb/level"
+    payload_on: "on"
+    payload_off: "off"
+    brightness_scale: 100
+    retain: true
+    qos: 1
+
+  - platform: flux_led
+    automatic_add: True

@@ -1,0 +1,62 @@
+#  - platform: mqtt
+#    name: "Front Porch Light Switch"
+#    state_topic: "smartthings/Front Porch Light Switch/switch"
+#    command_topic: "smartthings/Front Porch Light Switch/switch"
+#    payload_on: "on"
+#    payload_off: "off"
+#    retain: true
+#  - platform: mqtt
+#    name: "Driveway Light Switch"
+#    state_topic: "smartthings/Driveway Light Switch/switch"
+#    command_topic: "smartthings/Driveway Light Switch/switch"
+#    payload_on: "on"
+#    payload_off: "off"
+#    retain: true
+#  - platform: mqtt
+#    name: "Hotplate"
+#    state_topic: "smartthings/Hotplate/switch"
+#    command_topic: "smartthings/Hotplate/switch"
+#    payload_on: "on"
+#    payload_off: "off"
+#    retain: true
+  - platform: mqtt
+    name: "Bedroom Fan Outlet"
+    state_topic: "smartthings/Bedroom Fan Outlet/switch"
+    command_topic: "smartthings/Bedroom Fan Outlet/switch"
+    payload_on: "on"
+    payload_off: "off"
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Curling Iron"
+    state_topic: "smartthings/Curling Iron/switch"
+    command_topic: "smartthings/Curling Iron/switch"
+    payload_on: "on"
+    payload_off: "off"
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Bedroom TV Outlet"
+    state_topic: "smartthings/Bedroom TV Outlet/switch"
+    command_topic: "smartthings/Bedroom TV Outlet/switch"
+    payload_on: "on"
+    payload_off: "off"
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Christmas Tree Outlet"
+    state_topic: "smartthings/Christmas Tree Outlet/switch"
+    command_topic: "smartthings/Christmas Tree Outlet/switch"
+    payload_on: "on"
+    payload_off: "off"
+    retain: true
+    qos: 1
+####################
+### Command Line ###
+####################
+  - platform: command_line
+    switches:
+      dietpi_services:
+        command_off: "/DietPi/dietpi/dietpi-services restart"
+        command_on: "/DietPi/dietpi/dietpi-services status"
+        friendly_name: DietPi Services

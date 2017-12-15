@@ -1,0 +1,13 @@
+  - host: !secret android_ip_address
+    name: "Alarm Panel"
+    username: !secret android_ip_user
+    password: !secret android_ip_password
+    motion_sensor:
+#    sensors:
+#     - motion
+#     - battery_level
+#     - battery_temp
+#     - audio_connections
+#     - light
+#    switches:
+#     - video_recording

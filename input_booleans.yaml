@@ -1,0 +1,63 @@
+  bedroom_fan_high:
+    name: Bedroom Fan High
+    initial: off
+
+  bedroom_fan_medium:
+    name: Bedroom Fan Medium
+    initial: off
+
+  bedroom_fan_low:
+    name: Bedroom Fan Low
+    initial: off
+
+  jake_presence:
+    name: Jake Presence
+
+  lydia_presence:
+    name: Lydia Presence
+
+  mike_presence:
+    name: Mike Presence
+
+  megan_presence:
+    name: Megan Presence
+
+  watch_chromecast:
+    name: Watch Chromecast
+    initial: off
+
+  watch_roku:
+    name: Watch Roku
+    initial: off
+
+  listen_to_music:
+    name: Listen to Music
+    initial: off
+
+  watch_netflix:
+    name: Watch Netflix
+    initial: off
+
+  good_night:
+    name: Good Night
+    initial: off
+
+  good_morning:
+    name: Good Morning
+    initial: off
+
+  away:
+    name: Away
+    initial: off
+
+  home:
+    name: Home
+    initial: off
+
+  evening:
+    name: Evening
+    initial: off
+
+  close_garage_door:
+    name: Close Garage Door
+    initial: off

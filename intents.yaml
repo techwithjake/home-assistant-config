@@ -1,0 +1,15 @@
+  GetThermoTemperature:
+    speech:
+      text: The thermostat is at {{ states('sensor.thermostat_temperature') }} degrees
+
+  GetBedroomTemperature:
+    speech:
+      text: It is {{ states('sensor.bedroom_temp') }} degrees in the bedroom right now
+
+  RunGoodNight:
+    speech:
+      text: Good Night, Megan and Jake
+    action:
+      service: scene.turn_on
+      data:
+        entity_id: scene.good_night

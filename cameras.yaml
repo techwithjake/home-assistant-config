@@ -1,0 +1,27 @@
+#############
+### Arlos ###
+#############
+#  - platform: arlo
+#    ffmpeg_arguments: '-pred 1 -q:v 2'
+
+#########################
+### Samsung SmartCam ###
+########################
+  - platform: ffmpeg
+    input: !secret smartcam_input
+    name: "Living Room"
+#    ffmpeg_bin: /usr/bin/avconv
+
+############
+### Ring ###
+############
+#  - platform: ring
+#    ffmpeg_arguments: '-pred 1 -q:v 2'
+
+#################
+### Yi Camera ###
+#################
+  - platform: yi
+    name: Yi Camera
+    host: !secret yi_camera_address
+    password: !secret yi_camera_password

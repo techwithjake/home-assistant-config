@@ -1,0 +1,40 @@
+### Own Tracks ###
+#  - platform: owntracks
+#    waypoints: False
+#    waypoint_whitelist:
+#      - xl
+#      - dietpi
+#    secret: !secret ot_secret
+
+### Bluetooth ###
+#  - platform: bluetooth_le_tracker
+
+### NMap ###
+  - platform: nmap_tracker
+    hosts:
+      - 192.168.86.XXX
+      - 192.168.86.XXX
+      - 192.168.86.XXX
+      - 192.168.86.XXX
+      - 192.168.86.XXX
+      - 192.168.86.XXX
+      - 192.168.86.XXX
+    home_interval: 10
+    scan_options: " --privileged -sP "
+
+### Router Ping ###
+  - platform: ping
+    hosts:
+      jakes_ping: 192.168.86.XXX
+      lydias_ping: 192.168.86.XXX
+      mikes_ping: 192.168.86.XXX
+      megans_ping: 192.168.86.XXX
+    count: 10
+
+### GPS Logger ###
+#  - platform: gpslogger
+
+### Tile Tracker ###
+  - platform: tile
+    username: !secret tile_username
+    password: !secret tile_password

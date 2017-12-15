@@ -1,0 +1,15 @@
+  - platform: manual_mqtt
+    name: "Alarm Panel"
+  # code: 1050
+    disarm_after_trigger: false
+    state_topic: "home/alarm"
+    command_topic: "home/alarm/set"
+    payload_disarm: "DISARM"
+    payload_arm_away: "ARM_AWAY"
+    payload_arm_home: "ARM_HOME"
+    qos: 1
+    retain: true
+
+  - platform: arlo
+    home_mode_name: "Disarmed"
+    away_mode_name: "Armed"
