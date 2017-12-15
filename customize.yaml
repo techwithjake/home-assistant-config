@@ -115,5 +115,5 @@ binary_sensor.megans_home:
   device_class: occupancy
 device_tracker.lydia2:
   friendly_name: Lydia's Phone
-device_tracker.lydia2:
+device_tracker.lydia3:
   friendly_name: Lydia's Phone
