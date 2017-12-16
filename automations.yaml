@@ -43,7 +43,7 @@
       message: Lydia is Home. Changing Mode to Home.
     service: notify.pixel_xl
   - data:
-      entity_id: script.1506048911992
+      entity_id: script.home
     service: script.turn_on
   alias: Lydia Arrived
   id: '5'
@@ -65,10 +65,10 @@
     to: 'off'
 - action:
   - data:
-      entity_id: script.1506048911992
+      entity_id: script.home
     service: script.turn_on
   - data:
-      entity_id: script.1506199881063
+      entity_id: script.mike_arrived
     service: script.turn_on
   alias: Mike Arrived
   id: '7'
@@ -79,7 +79,7 @@
     to: 'on'
 - action:
   - data:
-      entity_id: script.1506199421487
+      entity_id: script.mike_left
     service: script.turn_on
   alias: Mike Left
   id: '8'
@@ -90,7 +90,7 @@
     to: 'off'
 - action:
   - data:
-      entity_id: script.1506049142953
+      entity_id: script.jake_left
     service: script.turn_on
   alias: Jake Left
   id: '9'
@@ -101,10 +101,10 @@
     to: 'off'
 - action:
   - data:
-      entity_id: script.1506048551098
+      entity_id: script.jake_arrived
     service: script.turn_on
   - data:
-      entity_id: script.1506048911992
+      entity_id: script.home
     service: script.turn_on
   alias: Jake Arrived
   id: '10'
@@ -323,7 +323,7 @@
 - action:
   - data:
       entity_id:
-      - script.1504031101811
+      - script.bathroom_lights_night
     service: script.turn_on
   alias: Bathroom Lights Night
   id: '20'
@@ -346,7 +346,7 @@
 - action:
   - data:
       entity_id:
-      - script.1504031024642
+      - script.bathroom_lights_day
     service: script.turn_on
   alias: Bathroom Lights Day
   id: '21'
@@ -369,7 +369,7 @@
 - action:
   - data:
       entity_id:
-      - script.1504031068845
+      - script.bathroom_lights_dusk_dawn
     service: script.turn_on
   alias: Bathroom Lights Dusk/Dawn
   id: '22'
@@ -410,7 +410,7 @@
     to: 'on'
 - action:
   - data:
-      entity_id: '1506048911992'
+      entity_id: 'script.home'
     service: script.turn_on
   - data:
       entity_id: input_boolean.megan_presence
@@ -425,7 +425,7 @@
     to: 'on'
 - action:
   - data:
-      entity_id: '1506048911992'
+      entity_id: 'script.home'
     service: script.turn_on
   alias: Sarah Arrived
   condition: []
@@ -454,7 +454,7 @@
 - action:
   - data:
       entity_id:
-      - script.1507919362525
+      - script.watch_chromecast_on
     service: script.turn_on
   alias: Watch Chromecast
   condition: []
@@ -497,7 +497,7 @@
 - action:
   - data:
       entity_id:
-      - script.1507939008245
+      - script.watch_roku_on
     service: script.turn_on
   alias: Watch Roku
   condition: []
@@ -689,7 +689,7 @@
     to: armed_away
 - action:
   - data:
-      entity_id: script.1504978061219
+      entity_id: script.toggle_garage_door_opener_switch
     service: script.turn_on
   alias: Toggle Garage Door Opener Switch
   condition: []
