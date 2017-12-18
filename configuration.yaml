@@ -23,6 +23,9 @@ homeassistant:
 frontend:
   javascript_version: latest
 
+# Enables cloud configuration
+cloud:
+
 # Enables configuration UI
 config:
 
