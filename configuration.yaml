@@ -28,6 +28,11 @@ cloud:
 
 # Enables configuration UI
 config:
+  alexa:
+    exclude_domains:
+      - script
+      - automation
+      - scene
 
 http:
   # Uncomment this to add a password (recommended!)
