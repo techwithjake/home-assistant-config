@@ -305,7 +305,7 @@ alarm_control_panel: !include alarm_panels.yaml
 #########################
 ### Android IP Webcam ###
 #########################
-#android_ip_webcam: !include android_ip_webcams.yaml
+android_ip_webcam: !include android_ip_webcams.yaml
 
 ##############
 ### Alerts ###
