@@ -324,7 +324,7 @@ alert: !include alerts.yaml
 ################
 ### InfluxDB ###
 ################
-#influxdb: !include influxdb.yaml
+influxdb: !include influxdb.yaml
 
 ####################
 ### Telegram Bot ###
