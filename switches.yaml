@@ -34,7 +34,7 @@
     payload_on: "on"
     payload_off: "off"
     retain: true
-    qos: 1
+
   - platform: mqtt
     name: "Bedroom TV Outlet"
     state_topic: "smartthings/Bedroom TV Outlet/switch"
@@ -42,7 +42,7 @@
     payload_on: "on"
     payload_off: "off"
     retain: true
-    qos: 1
+
   - platform: mqtt
     name: "Christmas Tree Outlet"
     state_topic: "smartthings/Christmas Tree Outlet/switch"
@@ -50,7 +50,7 @@
     payload_on: "on"
     payload_off: "off"
     retain: true
-    qos: 1
+
 ####################
 ### Command Line ###
 ####################
