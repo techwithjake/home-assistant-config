@@ -765,49 +765,21 @@
   condition: []
   id: '1506120836660'
   trigger:
-  - entity_id: binary_sensor.lydia
+  - entity_id: binary_sensor.lydias_home
     from: 'off'
     platform: state
     to: 'on'
-  - entity_id: device_tracker.lydias_ping
-    from: not_home
-    platform: state
-    to: home
-  - entity_id: device_tracker.lydia2
-    from: not_home
-    platform: state
-    to: home
 - action:
   - data:
       entity_id: input_boolean.lydia_presence
     service: input_boolean.turn_off
   alias: Lydia Presence Left
-  condition:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: device_tracker.lydias_ping
-      state: not_home
-    - condition: state
-      entity_id: device_tracker.lydia2
-      state: not_home
-    - condition: state
-      entity_id: binary_sensor.lydia
-      state: 'off'
   id: '1506121102764'
   trigger:
-  - entity_id: binary_sensor.lydia
+  - entity_id: binary_sensor.lydias_home
     from: 'on'
     platform: state
     to: 'off'
-  - entity_id: device_tracker.lydia2
-    from: home
-    platform: state
-    to: not_home
-  - entity_id: device_tracker.lydias_ping
-    from: home
-    platform: state
-    to: not_home
 - action:
   - data:
       entity_id: input_boolean.mike_presence
@@ -816,49 +788,21 @@
   condition: []
   id: '1506186847252'
   trigger:
-  - entity_id: binary_sensor.mike
+  - entity_id: binary_sensor.mikes_home
     from: 'off'
     platform: state
     to: 'on'
-  - entity_id: device_tracker.mikes_ping
-    from: not_home
-    platform: state
-    to: home
-  - entity_id: device_tracker.mike2
-    from: not_home
-    platform: state
-    to: home
 - action:
   - data:
       entity_id: input_boolean.mike_presence
     service: input_boolean.turn_off
   alias: Mike Presence Left
-  condition:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: device_tracker.mikes_ping
-      state: not_home
-    - condition: state
-      entity_id: device_tracker.mike2
-      state: not_home
-    - condition: state
-      entity_id: binary_sensor.mike
-      state: 'off'
   id: '1506196029011'
   trigger:
-  - entity_id: binary_sensor.mike
+  - entity_id: binary_sensor.mikes_home
     from: 'on'
     platform: state
     to: 'off'
-  - entity_id: device_tracker.mikes_ping
-    from: home
-    platform: state
-    to: not_home
-  - entity_id: device_tracker.mike2
-    from: home
-    platform: state
-    to: not_home
 - action:
   - data:
       message: Garage Left Open
