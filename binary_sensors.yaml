@@ -231,7 +231,7 @@
   - platform: bayesian
     name: Megan's Home
     prior: 0.2
-    probability_threshold: 0.40
+    probability_threshold: 0.55
     observations:
       - entity_id: 'device_tracker.megan2'
         prob_given_true: 0.7
