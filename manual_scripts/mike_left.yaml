@@ -2,7 +2,7 @@ mike_left:
   sequence:
   - data:
       message: Mike Left
-    service: notify.pixel_xl
+    service: notify.pushover
   - data:
       message: Mike Left
       target: arn:aws:sns:us-west-2:awsnotif:HASS2

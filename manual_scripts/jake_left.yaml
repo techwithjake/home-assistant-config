@@ -13,4 +13,4 @@ jake_left:
     service: remote.turn_on
   - data:
       message: You've Left. Turning Off Your Things.
-    service: notify.pixel_xl
+    service: notify.pushover

@@ -9,4 +9,4 @@ jake_arrived:
     service: homeassistant.turn_on
   - data:
       message: You're Home. Turning On Your Things.
-    service: notify.pixel_xl
+    service: notify.pushover

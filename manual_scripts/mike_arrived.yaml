@@ -6,4 +6,4 @@ mike_arrived:
     service: notify.amazon_sns
   - data:
       message: Mike is Home. Changing Mode to Home.
-    service: notify.pixel_xl
+    service: notify.pushover

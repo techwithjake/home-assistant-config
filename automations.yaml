@@ -41,7 +41,7 @@
 - action:
   - data:
       message: Lydia is Home. Changing Mode to Home.
-    service: notify.pixel_xl
+    service: notify.pushover
   - data:
       entity_id: script.home
     service: script.turn_on
@@ -123,7 +123,7 @@
     service: homeassistant.turn_off
   - data:
       message: Everyone has left. House Armed
-    service: notify.pixel_xl
+    service: notify.pushover
   - data:
       entity_id: lock.front_door_lock_locked
     service: lock.lock
@@ -190,7 +190,7 @@
     service: lock.lock
   - data:
       message: Front Door Is Locked After 5 Minutes of Being Unlocked
-    service: notify.pixel_xl
+    service: notify.pushover
   alias: Front Door Lock Auto Lock
   id: '13'
   trigger:
@@ -202,7 +202,7 @@
 - action:
   - data:
       message: Front Door Bell Rang
-    service: notify.pixel_xl
+    service: notify.pushover
   - data:
       message: Front Door Bell Rang
       target: arn:aws:sns:us-west-2:awsnotif:HASS3
@@ -218,7 +218,7 @@
 - action:
   - data:
       message: Intrusion Detected!
-    service: notify.pixel_xl
+    service: notify.pushover
   - data:
       entity_id:
       - switch.driveway_light_switch_switch
@@ -806,7 +806,7 @@
 - action:
   - data:
       message: Garage Left Open
-    service: notify.pixel_xl
+    service: notify.pushover
   - data:
       message: Garage Left Open
       target:

@@ -190,8 +190,8 @@
         to_state: 'home'
   - platform: bayesian
     name: Lydia's Home
-    prior: 0.2
-    probability_threshold: 0.75
+    prior: 0.1
+    probability_threshold: 0.40
     observations:
       - entity_id: 'binary_sensor.lydia'
         prob_given_true: 0.7
@@ -210,8 +210,8 @@
         to_state: 'home'
   - platform: bayesian
     name: Mike's Home
-    prior: 0.2
-    probability_threshold: 0.75
+    prior: 0.1
+    probability_threshold: 0.40
     observations:
       - entity_id: 'binary_sensor.mike'
         prob_given_true: 0.7
@@ -230,8 +230,8 @@
         to_state: 'home'
   - platform: bayesian
     name: Megan's Home
-    prior: 0.2
-    probability_threshold: 0.75
+    prior: 0.1
+    probability_threshold: 0.40
     observations:
       - entity_id: 'device_tracker.megan2'
         prob_given_true: 0.7
