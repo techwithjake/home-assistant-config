@@ -118,7 +118,7 @@ Server View:
     - group.internet_speed_group
     - group.plex_group
     - group.pihole_group
-    - group.deitpi_services_group
+#    - group.deitpi_services_group
 
 #################
 ### Batteries ###
