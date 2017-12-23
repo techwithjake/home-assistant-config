@@ -21,11 +21,11 @@
 ###############
 ### Pi Hole ###
 ###############
-#  - platform: pi_hole
-#    host: !secret pihole_ip
-#    monitored_conditions:
-#      - dns_queries_today
-#      - ads_blocked_today
+  - platform: pi_hole
+    host: !secret pihole_ip
+    monitored_conditions:
+      - dns_queries_today
+      - ads_blocked_today
 
 ###############################
 ### Fast.com Download Speed ###
