@@ -71,7 +71,6 @@
       host: !secret c2_ip
       name: Plex
 
-
 ####################
 ### Command Line ###
 ####################
