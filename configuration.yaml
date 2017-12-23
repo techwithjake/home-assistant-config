@@ -241,6 +241,11 @@ input_boolean: !include input_booleans.yaml
 ####################
 remote: !include remotes.yaml
 
+#####################
+### Media PLayers ###
+#####################
+#media_player: !include media_players.yaml
+
 ##############################
 ### ZigBee Home Automation ###
 ##############################

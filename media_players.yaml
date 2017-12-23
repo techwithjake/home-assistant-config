@@ -1,0 +1,10 @@
+############
+### Plex ###
+############
+  - platform: plex
+    entity_namespace: 'DietPiC2 Plex'
+    ip_addres: !secret c2_ip
+    port: 32400
+    token: !secret plex_token
+    ssl: True
+    verify: False

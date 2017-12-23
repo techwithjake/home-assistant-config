@@ -68,8 +68,11 @@
 ### Plex Monitor ###
 ####################
   - platform: plex
-      host: !secret c2_ip
-      name: Plex
+    host: !secret c2_ip
+    name: Plex
+    username: !secret plex_user
+    password: !secret plex_password
+    token: !secret plex_token
 
 ####################
 ### Command Line ###

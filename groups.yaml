@@ -116,6 +116,7 @@ Server View:
     - group.server_group
     - group.wifi_group
     - group.internet_speed_group
+    - group.plex_group
     - group.pihole_group
     - group.deitpi_services_group
 
@@ -367,6 +368,10 @@ Internet Speed Group:
   name: Internet Speed
   entities:
     - sensor.fastcom_download
+Plex Group:
+  name: Plex
+  entities:
+    - sensor.dietpic2_plex
 PiHole Group:
   name: Pi-Hole
   entities:
