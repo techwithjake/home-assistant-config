@@ -356,7 +356,7 @@ Server Group:
   name: Server
   entities:
     - sensor.cpu_use
-    - sensor.ram_free
+    - sensor.ram_available
     - sensor.average_load_1m
     - sensor.disk_free_mnte04c2c951c1c4c52b0c9feb72f3e0412
 WiFi Group:

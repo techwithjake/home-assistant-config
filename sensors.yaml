@@ -61,8 +61,8 @@
       - type: memory_free
       - type: processor_use
       - type: load_1m
-#      - type: disk_free
-#        arg: /mnt/e04c2c95-1c1c-4c52-b0c9-feb72f3e0412
+      - type: disk_free
+        arg: /mnt/e04c2c95-1c1c-4c52-b0c9-feb72f3e0412
 
 ####################
 ### Plex Monitor ###

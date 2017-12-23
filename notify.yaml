@@ -43,3 +43,9 @@
     name: pushover
     api_key: !secret pushover_app_api
     user_key: !secret pushover_user_key
+
+### SimplePush ###
+  - platform: simplepush
+    device_key: !secret sp_device_key
+    salt: !secret sp_salt
+    password: !secret sp_password
