@@ -44,11 +44,6 @@
     api_key: !secret pushover_app_api
     user_key: !secret pushover_user_key
 
-### Plex ###
-plex_token: plex_token
-plex_user: plex_user
-plex_password: plex_password
-
 ### SimplePush ###
   - platform: simplepush
     name: simplepush_regular
