@@ -44,8 +44,37 @@
     api_key: !secret pushover_app_api
     user_key: !secret pushover_user_key
 
+### Plex ###
+plex_token: plex_token
+plex_user: plex_user
+plex_password: plex_password
+
 ### SimplePush ###
   - platform: simplepush
+    name: simplepush_regular
     device_key: !secret sp_device_key
     salt: !secret sp_salt
     password: !secret sp_password
+    event: regular
+  - platform: simplepush
+    name: simplepush_intrusion
+    device_key: !secret sp_device_key
+    salt: !secret sp_salt
+    password: !secret sp_password
+    event: intrusion
+
+### Mailgun ###
+  - platform: mailgun
+    name: mailgun_jake
+    recipient: christpunk01@gmail.com
+
+### Notify Groups ###
+  - platform: group
+    name: Jake Urgent
+    services:
+      - service: simplepush_intrusion
+      - service: pushover
+      - service: amazon_sns
+        data:
+          target: arn:aws:sns:us-west-2:awsnotify:HASS1
+      - service: mailgun_jake

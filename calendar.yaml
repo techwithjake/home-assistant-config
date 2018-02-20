@@ -1,0 +1,4 @@
+  - platform: todoist
+    token: !secret todoist_token
+    custom_projects:
+      - name: 'All Projects'

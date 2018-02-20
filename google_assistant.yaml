@@ -1,0 +1,94 @@
+  project_id: !secret ga_project_id
+  client_id: !secret ga_client_id
+  access_token: !secret ga_access_token
+  api_key: !secret ga_api_key
+  exposed_domains:
+    - light
+    - switch
+    - fan
+    - climate
+  agent_user_id: !secret ga_user
+  expose_by_default: true
+  entity_config:
+    light.fortrezz_siren_level:
+      expose: false
+    cover.garage_door:
+      expose: false
+    switch.aeotec_siren_switch:
+      expose: false
+    switch.garage_door_opener_switch:
+      expose: false
+    switch.vizio_sound_bar_volume_up:
+      expose: false
+    script.vizio_volume_up:
+      expose: true
+    switch.vizio_sound_bar_volume_down:
+      expose: false
+    script.vizio_volume_down:
+      expose: true
+#    switch.vizio_sound_bar_volume_mute:
+#      expose: false
+    switch.vizio_sound_bar_input_digital:
+      expose: false
+    switch.vizio_sound_bar_input_optical:
+      expose: false
+    switch.vizio_sound_bar_input_aux_1:
+      expose: false
+    switch.vizio_sound_bar_input_aux_2:
+      expose: false
+    switch.vizio_sound_bar_input_hdmi:
+      expose: false
+    switch.vizio_sound_bar_input_hdmi_arc:
+      expose: false
+    switch.vizio_sound_bar_input_usb:
+      expose: false
+    switch.vizio_sound_bar_input_bluetooth:
+      expose: false
+    switch.space_heater_timer:
+      expose: false
+    switch.sanyo_tv_volume_up:
+      expose: false
+    switch.sanyo_tv_volume_down:
+      expose: false
+    switch.sanyo_tv_volume_mute:
+      expose: false
+    switch.sanyo_tv_input_change:
+      expose: false
+    switch.hdmi_multiplexer_input_1:
+      expose: false
+    switch.hdmi_multiplexer_input_2:
+      expose: false
+    switch.hdmi_multiplexer_input_3:
+      expose: false
+    switch.hdmi_multiplexer_input_4:
+      expose: false
+    switch.hdmi_multiplexer_input_5:
+      expose: false
+    switch.lasko_fan_timer:
+      expose: false
+    light.bathroom_center:
+      expose: false
+    light.bathroom_left:
+      expose: false
+    light.bathroom_right:
+      expose: false
+#    light.bathroom:
+#      expose: false
+#    light.kitchen:
+#      expose: false
+    light.kitchen_bulb:
+      expose: false
+#    light.hgrp0000000014:
+#      expose: false
+    switch.dietpi_services:
+      expose: false
+    switch.sirens:
+      expose: false
+    switch.watch_chromecast1:
+      expose: false
+    switch.watch_roku1:
+      expose: false
+    switch.watch_netflix1:
+      expose: false
+    script.tv_night_timer:
+      expose: true

@@ -12,50 +12,51 @@
   - platform: mqtt
     name: "Bedroom Door"
     state_topic: "smartthings/Bedroom Door/contact"
-    device_class: opening
+    device_class: door
     payload_on: "open"
     payload_off: "closed"
-    optimistic: true
+    payload_available: "ONLINE"
+    payload_not_available: "OFFLINE"
     retain: true
     qos: 1
   - platform: mqtt
     name: "Bedroom Window"
     state_topic: "smartthings/Bedroom Window/contact"
-    device_class: opening
+    device_class: window
     payload_on: "open"
     payload_off: "closed"
+    payload_available: "Online"
+    payload_not_available: "Offline"
     retain: true
     qos: 1
   - platform: mqtt
     name: "Front Door"
     state_topic: "smartthings/Front Door/contact"
-    device_class: opening
+    device_class: door
     payload_on: "open"
     payload_off: "closed"
+    payload_available: "Online"
+    payload_not_available: "Offline"
     retain: true
     qos: 1
   - platform: mqtt
     name: "Back Sliding Door"
     state_topic: "smartthings/Back Sliding Door/contact"
-    device_class: opening
+    device_class: door
     payload_on: "open"
     payload_off: "closed"
+    payload_available: "Online"
+    payload_not_available: "Offline"
     retain: true
     qos: 1
-#  - platform: mqtt
-#    name: "Garage Door"
-#    state_topic: "smartthings/Garage Door/contact"
-#    device_class: opening
-#    payload_on: "open"
-#    payload_off: "closed"
-#    retain: true
-#    optimistic: false
   - platform: mqtt
     name: "Bathroom Door"
     state_topic: "smartthings/Bathroom Door/contact"
-    device_class: opening
+    device_class: door
     payload_on: "open"
     payload_off: "closed"
+    payload_available: "Online"
+    payload_not_available: "Offline"
     retain: true
     qos: 1
 
@@ -68,22 +69,26 @@
     device_class: motion
     payload_on: "active"
     payload_off: "inactive"
+    payload_available: "Online"
+    payload_not_available: "Offline"
     retain: true
     qos: 1
-  - platform: mqtt
-    name: "Bathroom Motion"
-    state_topic: "smartthings/Bathroom Hue Motion/motion"
-    device_class: motion
-    payload_on: "active"
-    payload_off: "inactive"
-    retain: true
-    qos: 1
+#  - platform: mqtt
+#    name: "Bathroom Motion"
+#    state_topic: "smartthings/Bathroom Hue Motion/motion"
+#    device_class: motion
+#    payload_on: "active"
+#    payload_off: "inactive"
+#    retain: true
+#    qos: 1
   - platform: mqtt
     name: "Backyard Motion"
     state_topic: "smartthings/Backyard Camera/motion"
     device_class: motion
     payload_on: "active"
     payload_off: "inactive"
+    payload_available: "Online"
+    payload_not_available: "Offline"
     retain: true
     qos: 1
   - platform: mqtt
@@ -92,6 +97,8 @@
     device_class: motion
     payload_on: "active"
     payload_off: "inactive"
+    payload_available: "Online"
+    payload_not_available: "Offline"
     retain: true
     qos: 1
   - platform: mqtt
@@ -100,6 +107,8 @@
     device_class: motion
     payload_on: "active"
     payload_off: "inactive"
+    payload_available: "Online"
+    payload_not_available: "Offline"
     retain: true
     qos: 1
   - platform: mqtt
@@ -108,6 +117,8 @@
     device_class: motion
     payload_on: "ON"
     payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
     retain: true
     qos: 1
   - platform: mqtt
@@ -116,6 +127,8 @@
     payload_on: "ON"
     payload_off: "OFF"
     device_class: motion
+    payload_available: "Online"
+    payload_not_available: "Offline"
     qos: 1
     retain: true
   - platform: mqtt
@@ -124,8 +137,54 @@
     payload_on: "ON"
     payload_off: "OFF"
     device_class: motion
+    payload_available: "Online"
+    payload_not_available: "Offline"
     qos: 1
     retain: true
+
+##########################
+### Water Leak Sensors ###
+##########################
+  - platform: mqtt
+    name: "Bathroom Sink Leak Sensor"
+    state_topic: "smartthings/Bathroom Sink Leak Sensor/water"
+    device_class: moisture
+    payload_on: "wet"
+    payload_off: "dry"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Kitchen Leak Sensor"
+    state_topic: "smartthings/Kitchen Leak Sensor/water"
+    device_class: moisture
+    payload_on: "wet"
+    payload_off: "dry"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Master Bathroom Left Leak Sensor"
+    state_topic: "smartthings/Master Bathroom Left Leak Sensor/water"
+    device_class: moisture
+    payload_on: "wet"
+    payload_off: "dry"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Upstairs Bathroom Leak Sensor"
+    state_topic: "smartthings/Upstairs Bathroom Leak Sensor/water"
+    device_class: moisture
+    payload_on: "wet"
+    payload_off: "dry"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: true
+    qos: 1
 
 ########################
 ### Presence Sensors ###
@@ -231,7 +290,7 @@
   - platform: bayesian
     name: Megan's Home
     prior: 0.2
-    probability_threshold: 0.55
+    probability_threshold: 0.45
     observations:
       - entity_id: 'device_tracker.megan2'
         prob_given_true: 0.7
@@ -248,3 +307,21 @@
         prob_given_false: 0.2
         platform: 'state'
         to_state: 'home'
+
+##############
+### Linode ###
+##############
+  - platform: linode
+    nodes:
+      - 'mail-in-a-box'
+
+###############
+### Buttons ###
+###############
+#  - platform: mqtt
+#    name: "Ring Button"
+#    state_topic: "smartthings/Front Door Bell/button"
+#    payload_on: "ON"
+#    payload_off: "OFF"
+#    qos: 1
+#    retain: true

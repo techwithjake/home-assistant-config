@@ -1,0 +1,6 @@
+listen_to_music_off:
+  sequence:
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_power
+    service: switch.turn_off

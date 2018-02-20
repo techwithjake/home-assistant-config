@@ -1,99 +1,3 @@
-  - name: Watch Chromecast ON
-    entities:
-      input_boolean.watch_roku: off
-      input_boolean.watch_netflix: off
-      input_boolean.listen_to_music: off
-      input_select.harmony_hub_activities:
-        option: Watch Chromecast
-      remote.harmony_hub:
-        state: on
-        activity: Watch Chromecast
-      input_boolean.watch_chromecast: on
-
-  - name: Watch Roku ON
-    entities:
-      input_boolean.watch_chromecast: off
-      input_boolean.watch_netflix: off
-      input_boolean.listen_to_music: off
-      input_select.harmony_hub_activities:
-        option: Watch Roku
-      remote.harmony_hub:
-        state: on
-        activity: Watch Roku
-      input_boolean.watch_roku: on
-
-  - name: Watch Netflix ON
-    entities:
-      input_boolean.watch_roku: off
-      input_boolean.watch_chromecast: off
-      input_boolean.listen_to_music: off
-      input_select.harmony_hub_activities:
-        option: Watch Netflix
-      remote.harmony_hub:
-        state: on
-        activity: Watch Netflix
-      input_boolean.watch_netflix: on
-
-  - name: Listen to Music ON
-    entities:
-      input_boolean.watch_roku: off
-      input_boolean.watch_netflix: off
-      input_boolean.watch_chromecast: off
-      input_select.harmony_hub_activities:
-        option: Listen to Music
-      remote.harmony_hub:
-        state: on
-        activity: Listen to Music
-      input_boolean.listen_to_music: on
-
-  - name: Harmony Hub Off
-    entities:
-      input_boolean.watch_roku: off
-      input_boolean.watch_netflix: off
-      input_boolean.listen_to_music: off
-      input_boolean.watch_chromecast: off
-      input_select.harmony_hub_activities:
-        option: Power Off
-      remote.harmony_hub:
-        state: on
-        activity: PowerOff
-
-  - name: Watch Chromecast OFF
-    entities:
-      input_select.harmony_hub_activities:
-        option: Watch Chromecast
-      remote.harmony_hub:
-        state: off
-        activity: Watch Chromecast
-      input_boolean.watch_chromecast: off
-
-  - name: Watch Roku OFF
-    entities:
-      input_select.harmony_hub_activities:
-        option: Watch Roku
-      remote.harmony_hub:
-        state: off
-        activity: Watch Roku
-      input_boolean.watch_roku: off
-
-  - name: Watch Netflix OFF
-    entities:
-      input_select.harmony_hub_activities:
-        option: Watch Netflix
-      remote.harmony_hub:
-        state: off
-        activity: Watch Netflix
-      input_boolean.watch_netflix: off
-
-  - name: Listen to Music OFF
-    entities:
-      input_select.harmony_hub_activities:
-        option: Listen to Music
-      remote.harmony_hub:
-        state: off
-        activity: Listen to Music
-      input_boolean.listen_to_music: off
-
   - name: Away
     entities:
       input_select.mode:
@@ -121,3 +25,14 @@
   - name: Close Garage Door
     entities:
       cover.garage_door: closed
+
+  - name: Bedroom Bulbs OFF
+    entities:
+      light.osram_lightify_a19_rgbw_0007b483_3:
+        state: off
+      light.osram_lightify_a19_rgbw_0007b6b8_3:
+        state: off
+      light.osram_lightify_a19_rgbw_0007b8b2_3:
+        state: off
+      light.osram_lightify_a19_rgbw_00b00741_3:
+        state: off

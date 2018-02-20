@@ -1,4 +1,4 @@
-watch_chromecast_on:
+listen_to_music_on:
   sequence:
   - data:
       entity_id:
@@ -7,13 +7,10 @@ watch_chromecast_on:
   - delay: 00:00:03
   - data:
       entity_id:
-      - switch.watch_chromecast
-      - switch.sanyo_tv_power
-      - switch.hdmi_multiplexer_input_4
       - switch.vizio_sound_bar_power
-      - switch.vizio_sound_bar_input_digital
+      - switch.vizio_sound_bar_input_optical
     service: switch.turn_on
   - data:
       entity_id: input_select.tv_activities
-      option: Watch Chromecast
+      option: Listen to Music
     service: input_select.select_option

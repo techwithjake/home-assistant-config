@@ -1,0 +1,5 @@
+sanyo_tv_input_change:
+  sequence:
+  - data:
+      entity_id: switch.sanyo_tv_input_change
+    service: switch.turn_on

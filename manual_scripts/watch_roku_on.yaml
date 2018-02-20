@@ -2,18 +2,18 @@ watch_roku_on:
   sequence:
   - data:
       entity_id:
-      - input_boolean.watch_chromecast
-      - input_boolean.watch_netflix
-      - input_boolean.listen_to_music
-    service: input_boolean.turn_off
+      - switch.bedroom_tv_outlet
+    service: switch.turn_on
+  - delay: 00:00:03
   - data:
-      entity_id: input_boolean.watch_roku
-    service: input_boolean.turn_on
+      entity_id:
+      - switch.watch_roku
+      - switch.sanyo_tv_power
+      - switch.hdmi_multiplexer_input_2
+      - switch.vizio_sound_bar_power
+      - switch.vizio_sound_bar_input_digital
+    service: switch.turn_on
   - data:
-      activity: Watch Roku
-      entity_id: remote.harmony_hub
-    service: remote.turn_on
-  - data:
-      entity_id: input_select.harmony_hub_activities
+      entity_id: input_select.tv_activities
       option: Watch Roku
     service: input_select.select_option

@@ -1,15 +1,3 @@
-  bedroom_fan_high:
-    name: Bedroom Fan High
-    initial: off
-
-  bedroom_fan_medium:
-    name: Bedroom Fan Medium
-    initial: off
-
-  bedroom_fan_low:
-    name: Bedroom Fan Low
-    initial: off
-
   jake_presence:
     name: Jake Presence
 
@@ -21,22 +9,6 @@
 
   megan_presence:
     name: Megan Presence
-
-  watch_chromecast:
-    name: Watch Chromecast
-    initial: off
-
-  watch_roku:
-    name: Watch Roku
-    initial: off
-
-  listen_to_music:
-    name: Listen to Music
-    initial: off
-
-  watch_netflix:
-    name: Watch Netflix
-    initial: off
 
   good_night:
     name: Good Night

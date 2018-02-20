@@ -10,6 +10,6 @@
     speech:
       text: Good Night, Megan and Jake
     action:
-      service: scene.turn_on
+      service: script.turn_on
       data:
-        entity_id: scene.good_night
+        entity_id: script.good_night

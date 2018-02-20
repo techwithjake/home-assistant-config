@@ -20,7 +20,7 @@
   - data:
       message: Garage Door Has Opened
       target:
-      - arn:aws:sns:us-west-2:awsnotif:HASS1
+      - arn:aws:sns:us-west-2:120074880604:HASS1
     service: notify.amazon_sns
   condition:
   - condition: or
@@ -41,7 +41,7 @@
 - action:
   - data:
       message: Lydia is Home. Changing Mode to Home.
-    service: notify.pushover
+    service: notify.simplepush_regular
   - data:
       entity_id: script.home
     service: script.turn_on
@@ -123,12 +123,14 @@
     service: homeassistant.turn_off
   - data:
       message: Everyone has left. House Armed
-    service: notify.pushover
+    service: notify.simplepush_regular
   - data:
       entity_id: lock.front_door_lock_locked
     service: lock.lock
   - data:
-      entity_id: alarm_control_panel.alarm_panel
+      entity_id:
+      - alarm_control_panel.alarm_panel
+      - alarm_control_panel.arlo_base
     service: alarm_control_panel.alarm_arm_away
   - data:
       entity_id: input_boolean.close_garage_door
@@ -137,9 +139,6 @@
       entity_id: climate.thermostat_cooling_1
       temperature: '78'
     service: cliamte.set_temperature
-  - data:
-      event: everyone_left
-    service: ifttt.trigger
   condition:
   - condition: and
     conditions:
@@ -174,13 +173,13 @@
     service: fan.set_speed
   - data:
       entity_id:
-      - input_boolean.bedroom_fan_medium
-      - input_boolean.bedroom_fan_low
-    service: input_boolean.turn_off
+      - switch.bedroom_fan_medium
+      - switch.bedroom_fan_low
+    service: switch.turn_off
   alias: Bedroom Fan High
   id: '12'
   trigger:
-  - entity_id: input_boolean.bedroom_fan_high
+  - entity_id: switch.bedroom_fan_high
     from: 'off'
     platform: state
     to: 'on'
@@ -190,7 +189,7 @@
     service: lock.lock
   - data:
       message: Front Door Is Locked After 5 Minutes of Being Unlocked
-    service: notify.pushover
+    service: notify.simplepush_regular
   alias: Front Door Lock Auto Lock
   id: '13'
   trigger:
@@ -202,10 +201,10 @@
 - action:
   - data:
       message: Front Door Bell Rang
-    service: notify.pushover
+    service: notify.simplepush_regular
   - data:
       message: Front Door Bell Rang
-      target: arn:aws:sns:us-west-2:awsnotif:HASS3
+      target: arn:aws:sns:us-west-2:120074880604:HASS3
     service: notify.amazon_sns
   alias: Front Door Bell Rang
   id: '14'
@@ -218,7 +217,7 @@
 - action:
   - data:
       message: Intrusion Detected!
-    service: notify.pushover
+    service: notify.simplepush_intrusion
   - data:
       entity_id:
       - switch.driveway_light_switch_switch
@@ -227,9 +226,6 @@
   - data:
       entity_id: alarm_control_panel.alarm_panel
     service: alarm_control_panel.alarm_trigger
-  - data:
-      message: Intrusion Detected!
-    service: notify.telegram
   alias: Intrusion Detected Away (Open/Close)
   id: '15'
   trigger:
@@ -293,13 +289,13 @@
     service: fan.set_speed
   - data:
       entity_id:
-      - input_boolean.bedroom_fan_low
-      - input_boolean.bedroom_fan_high
-    service: input_boolean.turn_off
+      - switch.bedroom_fan_low
+      - switch.bedroom_fan_high
+    service: switch.turn_off
   alias: Bedroom Fan Medium
   id: '18'
   trigger:
-  - entity_id: input_boolean.bedroom_fan_medium
+  - entity_id: switch.bedroom_fan_medium
     from: 'off'
     platform: state
     to: 'on'
@@ -310,13 +306,13 @@
     service: fan.set_speed
   - data:
       entity_id:
-      - input_boolean.bedroom_fan_medium
-      - input_boolean.bedroom_fan_high
-    service: input_boolean.turn_off
+      - switch.bedroom_fan_medium
+      - switch.bedroom_fan_high
+    service: switch.turn_off
   alias: Bedroom Fan Low
   id: '19'
   trigger:
-  - entity_id: input_boolean.bedroom_fan_low
+  - entity_id: switch.bedroom_fan_low
     from: 'off'
     platform: state
     to: 'on'
@@ -336,7 +332,7 @@
     from: 'off'
     platform: state
     to: 'on'
-  - entity_id: binary_sensor.bathroom_motion
+  - entity_id: sensor.bathroom_motion_motion_sensor
     platform: state
     to: 'on'
   - entity_id: binary_sensor.bathroom_door
@@ -359,7 +355,7 @@
     from: 'off'
     platform: state
     to: 'on'
-  - entity_id: binary_sensor.bathroom_motion
+  - entity_id: sensor.bathroom_motion_motion_sensor
     platform: state
     to: 'on'
   - entity_id: binary_sensor.bathroom_door
@@ -391,7 +387,7 @@
     from: 'off'
     platform: state
     to: 'on'
-  - entity_id: binary_sensor.bathroom_motion
+  - entity_id: sensor.bathroom_motion_motion_sensor
     platform: state
     to: 'on'
 - action:
@@ -410,11 +406,14 @@
     to: 'on'
 - action:
   - data:
-      entity_id: 'script.home'
+      entity_id: script.home
     service: script.turn_on
   - data:
       entity_id: input_boolean.megan_presence
     service: input_boolean.turn_on
+  - data:
+      message: Megan's Home.
+    service: notify.simplepush_regular
   alias: Megan Arrived
   condition: []
   id: '1503119398746'
@@ -425,20 +424,20 @@
     to: 'on'
 - action:
   - data:
-      entity_id: 'script.home'
+      entity_id: script.home
     service: script.turn_on
   alias: Sarah Arrived
   condition: []
   id: '1503119470023'
   trigger:
-  - entity_id: device_tracker.sarah2
+  - entity_id: device_tracker.sarah
     from: not_home
     platform: state
     to: home
 - action:
   - data:
       message: Garage Door Opened. Most likely Mike.
-      target: arn:aws:sns:us-west-2:awsnotif:HASS2
+      target: arn:aws:sns:us-west-2:120074880604:HASS2
     service: notify.amazon_sns
   alias: Garage Opened (Lydia)
   condition:
@@ -456,18 +455,15 @@
       entity_id:
       - script.watch_chromecast_on
     service: script.turn_on
-  alias: Watch Chromecast
+  alias: Watch Chromecast On
   condition: []
   id: '1503183433396'
   trigger:
-  - entity_id: input_boolean.watch_chromecast
+  - entity_id: switch.watch_chromecast
     from: 'off'
     platform: state
     to: 'on'
-  - entity_id: input_select.harmony_hub_activities
-    platform: state
-    to: Watch Chromecast
-  - entity_id: remote.harmony_hub
+  - entity_id: input_select.tv_activities
     platform: state
     to: Watch Chromecast
 - action:
@@ -499,78 +495,118 @@
       entity_id:
       - script.watch_roku_on
     service: script.turn_on
-  alias: Watch Roku
+  alias: Watch Roku On
   condition: []
   id: '1503356093720'
   trigger:
-  - entity_id: input_boolean.watch_roku
+  - entity_id: input_select.tv_activities
+    platform: state
+    to: Watch Roku
+  - entity_id: switch.watch_roku
     from: 'off'
     platform: state
     to: 'on'
-  - entity_id: input_select.harmony_hub_activities
-    platform: state
-    to: Watch Roku
-  - entity_id: remote.harmony_hub
-    platform: state
-    to: Watch Roku
 - action:
   - data:
       entity_id:
-      - scene.listen_to_music_on
-    service: scene.turn_on
-  alias: Listen to Music
+      - script.listen_to_music_on
+    service: script.turn_on
+  alias: Listen to Music On
   condition: []
   id: '1503356502266'
   trigger:
-  - entity_id: input_boolean.listen_to_music
+  - entity_id: switch.listen_to_music
     from: 'off'
     platform: state
     to: 'on'
-  - entity_id: input_select.harmony_hub_activities
-    platform: state
-    to: Listen to Music
-  - entity_id: remote.harmony_hub
+  - entity_id: input_select.tv_activities
     platform: state
     to: Listen to Music
 - action:
   - data:
       entity_id:
-      - scene.watch_netflix_on
-    service: scene.turn_on
-  alias: Watch Netflix
+      - script.listen_to_music_off
+    service: script.turn_on
+  alias: Listen to Music Off
+  condition: []
+  id: '150335673436587'
+  trigger:
+  - entity_id: switch.listen_to_music
+    from: 'on'
+    platform: state
+    to: 'off'
+- action:
+  - data:
+      entity_id:
+      - script.watch_netflix_on
+    service: script.turn_on
+  alias: Watch Netflix On
   condition: []
   id: '1503356733334'
   trigger:
-  - entity_id: input_boolean.watch_netflix
+  - entity_id: switch.watch_netflix
     from: 'off'
     platform: state
     to: 'on'
-  - entity_id: input_select.harmony_hub_activities
-    platform: state
-    to: Watch Netflix
-  - entity_id: remote.harmony_hub
+  - entity_id: input_select.tv_activities
     platform: state
     to: Watch Netflix
 - action:
   - data:
       entity_id:
-      - scene.harmony_hub_off
-    service: scene.turn_on
-  alias: Harmony Hub Power Off
+      - script.watch_netflix_off
+    service: script.turn_on
+  alias: Watch Netflix Off
   condition: []
-  id: '1503358774301'
+  id: '150335673'
   trigger:
-  - entity_id: remote.harmony_hub
-    platform: state
-    to: PowerOff
-  - entity_id:
-    - input_boolean.watch_chromecast
-    - input_boolean.watch_roku
-    - input_boolean.listen_to_music
-    - input_boolean.watch_netflix
+  - entity_id: switch.watch_netflix
+    from: 'on'
     platform: state
     to: 'off'
-  - entity_id: input_select.harmony_hub_activities
+- action:
+  - data:
+      entity_id:
+      - script.tv_off
+    service: script.turn_on
+  alias: Broadlink Set to Power Off
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: switch.watch_chromecast
+      state: 'off'
+    - condition: state
+      entity_id: switch.watch_roku
+      state: 'off'
+    - condition: state
+      entity_id: switch.listen_to_music
+      state: 'off'
+    - condition: state
+      entity_id: switch.watch_netflix
+      state: 'off'
+  id: '1503358774301'
+  trigger:
+  - entity_id:
+    - switch.watch_chromecast
+    - switch.watch_roku
+    - switch.listen_to_music
+    - switch.watch_netflix
+    platform: state
+    to: 'off'
+  - entity_id: input_select.tv_activities
+    platform: state
+    to: Power Off
+- action:
+  - data:
+      entity_id:
+      - script.tv_off
+    service: script.turn_on
+  alias: Broadlink Set to Power Off 2
+  condition: []
+  id: '150323456'
+  trigger:
+  - entity_id: input_select.tv_activities
     platform: state
     to: Power Off
 - action:
@@ -603,7 +639,7 @@
   condition: []
   id: '1504047240768'
   trigger:
-  - entity_id: binary_sensor.bathroom_motion
+  - entity_id: sensor.bathroom_motion_motion_sensor
     for:
       minutes: 15
     platform: state
@@ -631,7 +667,9 @@
     to: 'on'
 - action:
   - data:
-      entity_id: alarm_control_panel.alarm_panel
+      entity_id:
+      - alarm_control_panel.alarm_panel
+      - alarm_control_panel.arlo_base
     service: alarm_control_panel.alarm_arm_away
   alias: Set Alarm Panel to Armed Away from Mode
   condition: []
@@ -642,8 +680,13 @@
     to: Away
 - action:
   - data:
-      entity_id: alarm_control_panel.alarm_panel
+      entity_id:
+      - alarm_control_panel.alarm_panel
     service: alarm_control_panel.alarm_disarm
+  - data:
+      entity_id:
+      - alarm_control_panel.arlo_base
+    service: alarm_control_panel.alarm_arm_home
   alias: Set Alarm Panel to Home Disarmed from Mode
   condition: []
   id: '1504914648954'
@@ -706,57 +749,21 @@
   condition: []
   id: '1506047214970'
   trigger:
-  - entity_id: binary_sensor.jake
+  - entity_id: binary_sensor.jakes_home
     from: 'off'
     platform: state
     to: 'on'
-  - entity_id: device_tracker.jake2
-    from: not_home
-    platform: state
-    to: home
-  - entity_id: device_tracker.jakes_ping
-    from: not_home
-    platform: state
-    to: home
-  - entity_id: device_tracker.pixel_xl_pixelxl
-    from: not_home
-    platform: state
-    to: home
 - action:
   - data:
       entity_id: input_boolean.jake_presence
     service: input_boolean.turn_off
   alias: Jake Presence Left
-  condition:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: device_tracker.jakes_ping
-      state: not_home
-    - condition: state
-      entity_id: device_tracker.jake2
-      state: not_home
-    - condition: state
-      entity_id: binary_sensor.jake
-      state: 'off'
   id: '1506047306292'
   trigger:
-  - entity_id: binary_sensor.jake
+  - entity_id: binary_sensor.jakes_home
     from: 'on'
     platform: state
     to: 'off'
-  - entity_id: device_tracker.jake2
-    from: home
-    platform: state
-    to: not_home
-  - entity_id: device_tracker.jakes_ping
-    from: home
-    platform: state
-    to: not_home
-  - entity_id: device_tracker.pixel_xl_pixelxl
-    from: home
-    platform: state
-    to: not_home
 - action:
   - data:
       entity_id: input_boolean.lydia_presence
@@ -806,13 +813,13 @@
 - action:
   - data:
       message: Garage Left Open
-    service: notify.pushover
+    service: notify.simplepush_intrusion
   - data:
       message: Garage Left Open
       target:
-      - arn:aws:sns:us-west-2:awsnotif:HASS1
-      - arn:aws:sns:us-west-2:awsnotif:HASS2
-      - arn:aws:sns:us-west-2:awsnotif:HASS3
+      - arn:aws:sns:us-west-2:120074880604:HASS1
+      - arn:aws:sns:us-west-2:120074880604:HASS2
+      - arn:aws:sns:us-west-2:120074880604:HASS3
     service: notify.amazon_sns
   alias: Garage Left Open
   condition: []
@@ -928,6 +935,9 @@
   - data:
       entity_id: input_boolean.megan_presence
     service: input_boolean.turn_off
+  - data:
+      message: Megan Left.
+    service: notify.simplepush_regular
   alias: Megan Left
   condition: []
   id: '1503146'
@@ -937,10 +947,22 @@
     platform: state
     to: 'off'
 - action:
-  - delay: 00:05:00
+  - delay: 00:01:00
   - data:
       entity_id: group.all_automations
     service: homeassistant.turn_on
+  - service: input_select.select_option
+    entity_id: input_select.thermostat_operation_mode
+    data_template:
+      option: '{{ states.climate.thermostat_cooling_1.attributes.operation_mode }}'
+  - service: input_select.select_option
+    entity_id: input_select.thermostat_fan_mode
+    data_template:
+      option: '{{ states.climate.thermostat_cooling_1.attributes.fan_mode }}'
+  - service: input_number.set_value
+    entity_id: input_number.thermostat_target_temp
+    data_template:
+      value: '{{ states.climate.thermostat_cooling_1.attributes.temperature }}'
   alias: Home Assistant Start Up
   condition: []
   id: '15102065'
@@ -968,3 +990,673 @@
   trigger:
   - at: 02:00:00
     platform: time
+- action:
+  - data:
+      entity_id: switch.aeotec_siren_switch
+    service: switch.turn_on
+  - data:
+      entity_id: media_player.bedroom_home
+      message: Get the hell out of my room
+    service: tts.google_say
+  - data:
+      message: Someone's in your room
+    service: notify.simplepush_intrusion
+  - data:
+      target: arn:aws:sns:us-west-2:120074880604:HASS1
+      message: Someone's in your room
+    service: notify.amazon_sns
+  alias: Jake's Door Opened
+  condition:
+  - condition: state
+    entity_id: input_boolean.jake_presence
+    state: 'off'
+  id: '1514643781179'
+  trigger:
+  - entity_id: binary_sensor.bedroom_door
+    from: 'off'
+    platform: state
+    to: 'on'
+  - entity_id: binary_sensor.bedroom_motion
+    from: 'off'
+    platform: state
+    to: 'on'
+- action:
+  - data:
+      entity_id: switch.backyard_switch
+    service: switch.turn_off
+  alias: Backyard Light OFF at Sunrise
+  condition: []
+  id: '1515455312734'
+  trigger:
+  - event: sunrise
+    offset: '-30'
+    platform: sun
+- action:
+  - data:
+      entity_id:
+      - script.watch_chromecast_off
+    service: script.turn_on
+  alias: Watch Chromecast Off
+  condition: []
+  id: '153396'
+  trigger:
+  - entity_id: switch.watch_chromecast
+    from: 'on'
+    platform: state
+    to: 'off'
+- action:
+  - data:
+      entity_id:
+      - script.watch_roku_off
+    service: script.turn_on
+  alias: Watch Roku Off
+  condition: []
+  id: '150320'
+  trigger:
+  - entity_id: input_select.tv_activities
+    platform: state
+    to: Watch Roku
+  - entity_id: switch.watch_roku
+    from: 'on'
+    platform: state
+    to: 'off'
+- action:
+  - data:
+      entity_id:
+      - light.osram_lightify_a19_rgbw_0007b483_3
+      - light.osram_lightify_a19_rgbw_0007b6b8_3
+      - light.osram_lightify_a19_rgbw_0007b8b2_3
+      - light.osram_lightify_a19_rgbw_00b00741_3
+    service: light.turn_on
+  alias: Bedroom Switch Turns ON, Set Bulbs ON
+  condition: []
+  id: '1516378922027'
+  trigger:
+  - entity_id: switch.bedroom_light_switch_switch
+    from: 'off'
+    platform: state
+    to: 'on'
+- action:
+  - data:
+      entity_id:
+      - light.osram_lightify_a19_rgbw_0007b483_3
+      - light.osram_lightify_a19_rgbw_0007b6b8_3
+      - light.osram_lightify_a19_rgbw_0007b8b2_3
+      - light.osram_lightify_a19_rgbw_00b00741_3
+    service: light.turn_off
+  alias: Bedroom Switch Turns OFF, Set Bulbs OFF
+  condition: []
+  id: '151637'
+  trigger:
+  - entity_id: switch.bedroom_light_switch_switch
+    from: 'on'
+    platform: state
+    to: 'off'
+- action:
+  - data:
+      entity_id: script.bedroom_lights_day
+    service: script.turn_on
+  alias: Bedroom Lights Day
+  condition:
+  - after: 09:00:00
+    before: '19:00:00'
+    condition: time
+  id: '1516381827920'
+  trigger:
+  - entity_id: switch.bedroom_light_switch_switch
+    from: 'off'
+    platform: state
+    to: 'on'
+- action:
+  - data:
+      entity_id:
+      - switch.hdmi_multiplexer_input_1
+    service: switch.turn_on
+  - data:
+      entity_id:
+      - switch.hdmi_multiplexer_input_2
+      - switch.hdmi_multiplexer_input_3
+      - switch.hdmi_multiplexer_input_4
+      - switch.hdmi_multiplexer_input_5
+    service: switch.turn_off
+  - data:
+      entity_id: input_select.multiplexer_input
+      option: Input 1
+    service: input_select.select_option
+  alias: Set Multiplexer to Input 1
+  condition: []
+  id: '1517958418590'
+  trigger:
+  - entity_id: switch.hdmi_multiplexer_input_1
+    from: 'off'
+    platform: state
+    to: 'on'
+  - entity_id: input_select.multiplexer_input
+    platform: state
+    to: Input 1
+- action:
+  - data:
+      entity_id:
+      - switch.hdmi_multiplexer_input_2
+    service: switch.turn_on
+  - data:
+      entity_id:
+      - switch.hdmi_multiplexer_input_1
+      - switch.hdmi_multiplexer_input_3
+      - switch.hdmi_multiplexer_input_4
+      - switch.hdmi_multiplexer_input_5
+    service: switch.turn_off
+  - data:
+      entity_id: input_select.multiplexer_input
+      option: Input 2
+    service: input_select.select_option
+  alias: Set Multiplexer to Input 2
+  condition: []
+  id: '1517958418591'
+  trigger:
+  - entity_id: switch.hdmi_multiplexer_input_2
+    from: 'off'
+    platform: state
+    to: 'on'
+  - entity_id: input_select.multiplexer_input
+    platform: state
+    to: Input 2
+- action:
+  - data:
+      entity_id:
+      - switch.hdmi_multiplexer_input_3
+    service: switch.turn_on
+  - data:
+      entity_id:
+      - switch.hdmi_multiplexer_input_2
+      - switch.hdmi_multiplexer_input_1
+      - switch.hdmi_multiplexer_input_4
+      - switch.hdmi_multiplexer_input_5
+    service: switch.turn_off
+  - data:
+      entity_id: input_select.multiplexer_input
+      option: Input 3
+    service: input_select.select_option
+  alias: Set Multiplexer to Input 3
+  condition: []
+  id: '1517958418592'
+  trigger:
+  - entity_id: switch.hdmi_multiplexer_input_3
+    from: 'off'
+    platform: state
+    to: 'on'
+  - entity_id: input_select.multiplexer_input
+    platform: state
+    to: Input 3
+- action:
+  - data:
+      entity_id:
+      - switch.hdmi_multiplexer_input_4
+    service: switch.turn_on
+  - data:
+      entity_id:
+      - switch.hdmi_multiplexer_input_2
+      - switch.hdmi_multiplexer_input_3
+      - switch.hdmi_multiplexer_input_1
+      - switch.hdmi_multiplexer_input_5
+    service: switch.turn_off
+  - data:
+      entity_id: input_select.multiplexer_input
+      option: Input 4
+    service: input_select.select_option
+  alias: Set Multiplexer to Input 4
+  condition: []
+  id: '1517958418593'
+  trigger:
+  - entity_id: switch.hdmi_multiplexer_input_4
+    from: 'off'
+    platform: state
+    to: 'on'
+  - entity_id: input_select.multiplexer_input
+    platform: state
+    to: Input 4
+- action:
+  - data:
+      entity_id:
+      - switch.hdmi_multiplexer_input_5
+    service: switch.turn_on
+  - data:
+      entity_id:
+      - switch.hdmi_multiplexer_input_2
+      - switch.hdmi_multiplexer_input_3
+      - switch.hdmi_multiplexer_input_4
+      - switch.hdmi_multiplexer_input_1
+    service: switch.turn_off
+  - data:
+      entity_id: input_select.multiplexer_input
+      option: Input 5
+    service: input_select.select_option
+  alias: Set Multiplexer to Input 5
+  condition: []
+  id: '1517958418594'
+  trigger:
+  - entity_id: switch.hdmi_multiplexer_input_5
+    from: 'off'
+    platform: state
+    to: 'on'
+  - entity_id: input_select.multiplexer_input
+    platform: state
+    to: Input 5
+- action:
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_digital
+    service: switch.turn_on
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_optical
+      - switch.vizio_sound_bar_input_bluetooth
+      - switch.vizio_sound_bar_input_hdmi
+      - switch.vizio_sound_bar_input_hdmi_arc
+      - switch.vizio_sound_bar_input_aux_1
+      - switch.vizio_sound_bar_input_aux_2
+      - switch.vizio_sound_bar_input_usb
+    service: switch.turn_off
+  - data:
+      entity_id: input_select.vizio_soundbar_input
+      option: Digital Input
+    service: input_select.select_option
+  alias: Soundbar Set to Digital
+  condition: []
+  id: '1517960007103'
+  trigger:
+  - entity_id: input_select.vizio_soundbar_input
+    platform: state
+    to: Digital Input
+  - entity_id: switch.vizio_sound_bar_input_digital
+    from: 'off'
+    platform: state
+    to: 'on'
+- action:
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_optical
+    service: switch.turn_on
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_digital
+      - switch.vizio_sound_bar_input_bluetooth
+      - switch.vizio_sound_bar_input_hdmi
+      - switch.vizio_sound_bar_input_hdmi_arc
+      - switch.vizio_sound_bar_input_aux_1
+      - switch.vizio_sound_bar_input_aux_2
+      - switch.vizio_sound_bar_input_usb
+    service: switch.turn_off
+  - data:
+      entity_id: input_select.vizio_soundbar_input
+      option: Optical Input
+    service: input_select.select_option
+  alias: Soundbar Set to Optical
+  condition: []
+  id: '1517960007104'
+  trigger:
+  - entity_id: input_select.vizio_soundbar_input
+    platform: state
+    to: Optical Input
+  - entity_id: switch.vizio_sound_bar_input_optical
+    from: 'off'
+    platform: state
+    to: 'on'
+- action:
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_bluetooth
+    service: switch.turn_on
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_optical
+      - switch.vizio_sound_bar_input_digital
+      - switch.vizio_sound_bar_input_hdmi
+      - switch.vizio_sound_bar_input_hdmi_arc
+      - switch.vizio_sound_bar_input_aux_1
+      - switch.vizio_sound_bar_input_aux_2
+      - switch.vizio_sound_bar_input_usb
+    service: switch.turn_off
+  - data:
+      entity_id: input_select.vizio_soundbar_input
+      option: Bluetooth Input
+    service: input_select.select_option
+  alias: Soundbar Set to Bluetooth
+  condition: []
+  id: '1517960007105'
+  trigger:
+  - entity_id: input_select.vizio_soundbar_input
+    platform: state
+    to: Bluetooth Input
+  - entity_id: switch.vizio_sound_bar_input_bluetooth
+    from: 'off'
+    platform: state
+    to: 'on'
+- action:
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_hdmi
+    service: switch.turn_on
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_optical
+      - switch.vizio_sound_bar_input_digital
+      - switch.vizio_sound_bar_input_bluetooth
+      - switch.vizio_sound_bar_input_hdmi_arc
+      - switch.vizio_sound_bar_input_aux_1
+      - switch.vizio_sound_bar_input_aux_2
+      - switch.vizio_sound_bar_input_usb
+    service: switch.turn_off
+  - data:
+      entity_id: input_select.vizio_soundbar_input
+      option: HDMI Input
+    service: input_select.select_option
+  alias: Soundbar Set to HDMI
+  condition: []
+  id: '1517960007106'
+  trigger:
+  - entity_id: input_select.vizio_soundbar_input
+    platform: state
+    to: HDMI Input
+  - entity_id: switch.vizio_sound_bar_input_hdmi
+    from: 'off'
+    platform: state
+    to: 'on'
+- action:
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_hdmi_arc
+    service: switch.turn_on
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_optical
+      - switch.vizio_sound_bar_input_digital
+      - switch.vizio_sound_bar_input_bluetooth
+      - switch.vizio_sound_bar_input_hdmi
+      - switch.vizio_sound_bar_input_aux_1
+      - switch.vizio_sound_bar_input_aux_2
+      - switch.vizio_sound_bar_input_usb
+    service: switch.turn_off
+  - data:
+      entity_id: input_select.vizio_soundbar_input
+      option: HDMI Arc Input
+    service: input_select.select_option
+  alias: Soundbar Set to HDMI Arc
+  condition: []
+  id: '1517960007107'
+  trigger:
+  - entity_id: input_select.vizio_soundbar_input
+    platform: state
+    to: HDMI Arc Input
+  - entity_id: switch.vizio_sound_bar_input_hdmi_arc
+    from: 'off'
+    platform: state
+    to: 'on'
+- action:
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_aux_1
+    service: switch.turn_on
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_optical
+      - switch.vizio_sound_bar_input_digital
+      - switch.vizio_sound_bar_input_bluetooth
+      - switch.vizio_sound_bar_input_hdmi_arc
+      - switch.vizio_sound_bar_input_hdmi
+      - switch.vizio_sound_bar_input_aux_2
+      - switch.vizio_sound_bar_input_usb
+    service: switch.turn_off
+  - data:
+      entity_id: input_select.vizio_soundbar_input
+      option: Input Aux 1
+    service: input_select.select_option
+  alias: Soundbar Set to Aux 1 Input
+  condition: []
+  id: '1517960007108'
+  trigger:
+  - entity_id: input_select.vizio_soundbar_input
+    platform: state
+    to: Input Aux 1
+  - entity_id: switch.vizio_sound_bar_input_aux_1
+    from: 'off'
+    platform: state
+    to: 'on'
+- action:
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_aux_2
+    service: switch.turn_on
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_optical
+      - switch.vizio_sound_bar_input_digital
+      - switch.vizio_sound_bar_input_bluetooth
+      - switch.vizio_sound_bar_input_hdmi_arc
+      - switch.vizio_sound_bar_input_hdmi
+      - switch.vizio_sound_bar_input_aux_1
+      - switch.vizio_sound_bar_input_usb
+    service: switch.turn_off
+  - data:
+      entity_id: input_select.vizio_soundbar_input
+      option: Input Aux 2
+    service: input_select.select_option
+  alias: Soundbar Set to Aux 2 Input
+  condition: []
+  id: '1517960007109'
+  trigger:
+  - entity_id: input_select.vizio_soundbar_input
+    platform: state
+    to: Input Aux 2
+  - entity_id: switch.vizio_sound_bar_input_aux_2
+    from: 'off'
+    platform: state
+    to: 'on'
+- action:
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_usb
+    service: switch.turn_on
+  - data:
+      entity_id:
+      - switch.vizio_sound_bar_input_optical
+      - switch.vizio_sound_bar_input_digital
+      - switch.vizio_sound_bar_input_bluetooth
+      - switch.vizio_sound_bar_input_hdmi_arc
+      - switch.vizio_sound_bar_input_hdmi
+      - switch.vizio_sound_bar_input_aux_1
+      - switch.vizio_sound_bar_input_aux_2
+    service: switch.turn_off
+  - data:
+      entity_id: input_select.vizio_soundbar_input
+      option: Input USB
+    service: input_select.select_option
+  alias: Soundbar Set to USB Input
+  condition: []
+  id: '1517960007110'
+  trigger:
+  - entity_id: input_select.vizio_soundbar_input
+    platform: state
+    to: Input USB
+  - entity_id: switch.vizio_sound_bar_input_usb
+    from: 'off'
+    platform: state
+    to: 'on'
+- action:
+  - data_template:
+      entity_id: climate.thermostat_cooling_1
+      temperature: '{{ states.input_number.thermostat_target_temp.state }}'
+    service: climate.set_temperature
+  alias: Set Thermostat Set Temp Based on Input Number
+  condition: []
+  id: '1518105372605'
+  trigger:
+  - entity_id: input_number.thermostat_target_temp
+    platform: state
+- action:
+  - service: climate.set_operation_mode
+    entity_id: climate.thermostat_cooling_1
+    data_template:
+      operation_mode: '{{ states(''input_select.thermostat_operation_mode'') }}'
+  alias: Set Thermostat Operation Mode Based on Input Select
+  condition: []
+  id: '1518199156893'
+  trigger:
+  - entity_id: input_select.thermostat_operation_mode
+    platform: state
+- action:
+  - service: input_select.select_option
+    entity_id: input_select.thermostat_operation_mode
+    data_template:
+      option: '{{ states.climate.thermostat_cooling_1.attributes.operation_mode }}'
+  alias: Set Input Select Based on Thermostat Operation Mode
+  condition:
+    condition: template
+    value_template: '{{ trigger.to_state.attributes.operation_mode != trigger.from_state.attributes.operation_mode
+      }}'
+  id: '1518199192998'
+  trigger:
+  - entity_id: climate.thermostat_cooling_1
+    platform: state
+- action:
+  - service: climate.thermostat_cooling_1
+    entity_id: climate.thermostat_cooling_1
+    data_template:
+      fan_mode: "{% if is_state('input_select.theromstat_fan_mode', 'Auto Low') %}\n\
+        \    Auto Low\n{% elif is_state('input_select.theromstat_fan_mode', 'On Low')\
+        \ %}\n    On Low\n{% endif %}"
+  alias: Set Thermostat Fan Mode Based on Input Select
+  condition: []
+  id: '1518199233646'
+  trigger:
+  - entity_id: input_select.theromstat_fan_mode
+    platform: state
+- action:
+  - service: input_select.option
+    entity_id: input_select.theromstat_fan_mode
+    data_template:
+      option: "{% if is_state_attr('climate.thermostat_cooling_1', 'fan_mode', 'Auto\
+        \ Low') %}\n    Auto Low\n{% elif is_state_attr('climate.thermostat_cooling_1',\
+        \ 'fan_mode', 'On Low') %}\n    On Low\n{% endif %}"
+  alias: Set Input Select Based on Thermostat Fan Mode
+  condition:
+    condition: template
+    value_template: '{{ trigger.to_state.attributes.fan_mode != trigger.from_state.attributes.fan_mode
+      }}'
+  id: '1518199307758'
+  trigger:
+  - entity_id: climate.thermostat_cooling_1
+    platform: state
+- action:
+  - service: input_number.set_value
+    entity_id: input_number.thermostat_target_temp
+    data_template:
+      value: '{{ states.sensor.thermostat_set_point.state }}'
+  alias: Set Input Number Based on Thermostat Set Temp
+  condition:
+    condition: template
+    value_template: '{{ states.sensor.thermostat_set_point.state != states.input_number.thermostat_target_temp.state
+      }}'
+  id: '1518211154151'
+  trigger:
+  - entity_id: climate.thermostat_cooling_1
+    platform: state
+- action:
+  - service: notify.jake_urgent
+    data_template:
+      message: '{{ trigger.to_state.attributes.friendly_name }} has detected a leak.'
+      title: Water Leak Detected!
+  alias: Water Leak Detected
+  condition: []
+  id: '1518719294284'
+  trigger:
+  - entity_id: binary_sensor.bathroom_sink_leak_sensor
+    platform: state
+    to: 'on'
+  - entity_id: binary_sensor.kitchen_leak_sensor
+    platform: state
+    to: 'on'
+  - entity_id: binary_sensor.master_bathroom_left_leak_sensor
+    platform: state
+    to: 'on'
+  - entity_id: binary_sensor.upstairs_bathroom_leak_sensor
+    platform: state
+    to: 'on'
+- action:
+  - service: notify.simplepush_regular
+    data_template:
+      message: '{{ trigger.below_state.attributes.friendly_name }} has a low battery'
+      title: Low Battery Warning
+  alias: Battery Low
+  condition: []
+  id: '1518726783255'
+  trigger:
+  - below: '25'
+    entity_id: sensor.backyard_camera_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.bathroom_door_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.bathroom_motion_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.bathroom_sink_leak_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.bathroom_temp_humidity_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.battery_level_backyard
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.battery_level_driveway
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.battery_level_upstairs
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.bedroom_door_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.bedroom_motion_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.bedroom_window_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.front_door_lock_battery
+    platform: numeric_state
+  - entity_id: sensor.garage_door_house_battery
+    platform: numeric_state
+    below: '25'
+  - below: '25'
+    entity_id: sensor.kitchen_leak_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.jake_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.living_room_window_left_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.living_room_window_right_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.lydia_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.master_bathroom_left_leak_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.megan_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.mike_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.smoke_alarm_battery
+    platform: numeric_state
+  - below: '25'
+    entity_id: sensor.upstairs_bathroom_water_leak_battery
+    platform: numeric_state

@@ -2,8 +2,8 @@ mike_arrived:
   sequence:
   - data:
       message: Mike Is Home
-      target: arn:aws:sns:us-west-2:awsnotif:HASS2
+      target: arn:aws:sns:us-west-2:120074880604:HASS2
     service: notify.amazon_sns
   - data:
       message: Mike is Home. Changing Mode to Home.
-    service: notify.pushover
+    service: notify.simplepush_regular

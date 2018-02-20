@@ -1,0 +1,15 @@
+bedroom_lights_night:
+  sequence:
+  - delay: 00:00:01
+  - data:
+      brightness: 50
+      entity_id:
+      - light.osram_lightify_a19_rgbw_0007b483_3
+      - light.osram_lightify_a19_rgbw_0007b6b8_3
+      - light.osram_lightify_a19_rgbw_0007b8b2_3
+      - light.osram_lightify_a19_rgbw_00b00741_3
+      rgb_color:
+      - 255
+      - 0
+      - 0
+    service: light.turn_on

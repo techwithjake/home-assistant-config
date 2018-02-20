@@ -131,12 +131,14 @@
     method: GET
     name: Jake's location sensor
     scan_interval: 3
-  - platform: rest
-    resource: https://ml.internalpositioning.com/location?group=GROUP&user=USER
-    value_template: '{{ value_json.users.USER[0].location }}'
-    method: GET
-    name: Jake's location
-    scan_interval: 6
+
+#################
+### File Size ###
+#################
+  - platform: filesize
+    file_paths:
+      - /mnt/e04c2c95-1c1c-4c52-b0c9-feb72f3e0412/dietpi_userdata/homeassistant/home-assistant_v2.db
+      - /mnt/e04c2c95-1c1c-4c52-b0c9-feb72f3e0412/dietpi_userdata/homeassistant/home-assistant.log
 
 ##################################################
 ############ Template Sensors ####################
@@ -153,6 +155,14 @@
       theromstat_heating_1:
         friendly_name: Thermostat Heat Temp
         value_template: '{{ states.climate.thermostat_heating_1.attributes.temperature }}'
+      thermostat_set_point:
+        friendly_name: Thermostat Set Point
+        value_template: >-
+          {%- if is_state('input_select.thermostat_operation_mode', 'Heat') -%}
+              {{ states.climate.thermostat_heating_1.attributes.temperature }}
+          {%- elif is_state('input_select.thermostat_operation_mode', 'Cool') -%}
+              {{ states.climate.thermostat_cooling_1.attributes.temperature }}
+          {%- endif -%}
 
 #############################################
 ########## Battery Levels ###################
@@ -161,115 +171,104 @@
     name: "Bedroom Door Battery"
     state_topic: "smartthings/Bedroom Door/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: mqtt
     name: "Bathroom Door Battery"
     state_topic: "smartthings/Bathroom Door/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
-    retain: true
-  - platform: mqtt
-    name: "Garage Door Battery"
-    state_topic: "smartthings/Garage Door/battery"
-    unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: mqtt
     name: "Bedroom Window Battery"
     state_topic: "smartthings/Bedroom Window/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: mqtt
     name: "Garage Door House Battery"
     state_topic: "smartthings/Garage Door House/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: mqtt
     name: "Bedroom Motion Battery"
     state_topic: "smartthings/Bedroom Motion/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
-  - platform: mqtt
-    name: "Bathroom Motion Battery"
-    state_topic: "smartthings/Bathrom Hue Motion/battery"
-    unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
-    retain: true
+#  - platform: mqtt
+#    name: "Bathroom Motion Battery"
+#    state_topic: "smartthings/Bathrom Hue Motion/battery"
+#    unit_of_measurement: "%"
+#    retain: true
   - platform: mqtt
     name: "Bathroom Temp Humidity Battery"
     state_topic: "smartthings/Bathroom Temp Humidity Sensor/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: mqtt
     name: "Bathroom Sink Leak Battery"
     state_topic: "smartthings/Bathroom Sink Leak Sensor/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: mqtt
     name: "Living Room Window Left Battery"
     state_topic: "smartthings/Living Room Window Left/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: mqtt
     name: "Living Room Window Right Battery"
     state_topic: "smartthings/Living Room Window Right/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: mqtt
     name: "Master Bathroom Left Leak Battery"
     state_topic: "smartthings/Master Bathroom Left Leak Sensor/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: mqtt
     name: "Upstairs Bathroom Water Leak Battery"
     state_topic: "smartthings/Upstairs Bathroom Water Leak Sensor/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: mqtt
     name: "Kitchen Leak Battery"
     state_topic: "smartthings/Kitchen Leak Sensor/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: mqtt
     name: "Jake Battery"
     state_topic: "smartthings/Jake/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: mqtt
     name: "Lydia Battery"
     state_topic: "smartthings/Lydia/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: mqtt
     name: "Mike Battery"
     state_topic: "smartthings/Mike/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: mqtt
     name: "Megan Battery"
     state_topic: "smartthings/Megan/battery"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.batt }}'
     retain: true
   - platform: template
     sensors:
       front_door_lock_battery:
         friendly_name: 'Front Door Lock Battery'
         value_template: '{{ states.zwave.front_door_lock.attributes.battery_level }}'
+        unit_of_measurement: '%'
+      garage_door_battery:
+        friendly_name: 'Garage Door Battery'
+        value_template: '{{ states.zwave.garage_door.attributes.battery_level }}'
+        unit_of_measurement: '%'  
+      smoke_alarm_battery:
+        friendly_name: 'Smoke Alarm Battery'
+        value_template: '{{ states.zwave.smokeco_detector.attributes.battery_level }}'
+        unit_of_measurement: '%'   
+      bathroom_motion_battery:
+        friendly_name: 'Bathroom Motion Temp'
+        value_template: '{{ states.sensor.bathroom_motion_motion_sensor.attributes.battery }}'
         unit_of_measurement: '%'
 
 ##############################################
@@ -305,11 +304,11 @@
     state_topic: "smartthings/Garage Door House/temperature"
     unit_of_measurement: '°F'
     retain: true
-  - platform: mqtt
-    name: "Bathroom Motion Temp"
-    state_topic: "smartthings/Bathrom Hue Motion/temperature"
-    unit_of_measurement: '°F'
-    retain: true
+#  - platform: mqtt
+#    name: "Bathroom Motion Temp"
+#    state_topic: "smartthings/Bathrom Hue Motion/temperature"
+#    unit_of_measurement: '°F'
+#    retain: true
   - platform: mqtt
     name: "Bathroom Temp Humidity Temp"
     state_topic: "smartthings/Bathroom Temp Humidity Sensor/temperature"
@@ -351,6 +350,12 @@
     retain: true
     qos: 1
     unit_of_measurement: '°F'
+  - platform: template
+    sensors:
+      bathroom_motion_temp:
+        friendly_name: 'Bathroom Motion Temp'
+        value_template: '{{ ((float(states.sensor.bathroom_motion_motion_sensor.attributes.temperature) * 9) / 5) + 32 }}'
+        unit_of_measurement: '°F'
 
 ##############################################
 ############## Humidity ######################
@@ -373,8 +378,8 @@
     name: Bedroom Temp
     type: mean
     entity_ids:
-      - sensor.smartthings_motionv4
-      - sensor.centralite_3321s
+      - sensor.bedroom_motion_temp
+      - sensor.bedroom_window_temp
       - sensor.bedroom_door_temp
   - platform: min_max
     name: Living Room Temp
@@ -384,13 +389,3 @@
       - sensor.living_room_window_right_temp
 #      - sensor.kitchen_leak_temp
       - sensor.garage_door_house_temp
-
-###############################################
-################ Zanzito ######################
-###############################################
-  - platform: mqtt
-    name: Pixel XL Battery
-    state_topic: "zanzito/pixel_xl/battery_level"
-    unit_of_measurement: "%"
-    qos: 1
-    reatin: true

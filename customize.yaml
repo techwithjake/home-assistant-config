@@ -20,7 +20,6 @@ switch.bathroom_fan_switch:
   icon: mdi:fan
 cover.garage_door:
   device_class: garage
-  google_assistant: false
 sensor.pihole_dns_queries_today:
   icon: mdi:cloud-upload
 switch.bedroom_light_switch_switch:
@@ -31,8 +30,8 @@ switch.bathroom_light_switch:
 sensor.bedroom_door_temp:
   icon: mdi:thermometer
 switch.aeotec_siren_switch:
-  google_assistant: false
   friendly_name: Aeotec Siren
+  icon: mdi:alarm-light
 fan.bedroom_fan_switch_level:
   friendly_name: Bedroom Fan Switch
 climate.thermostat_cooling_1:
@@ -58,7 +57,7 @@ switch.bedroom_tv_outlet:
   icon: mdi:power-socket-us
 sensor.bathroom_humidity:
   icon: mdi:water-percent
-binary_sensor.visonic_mct340:
+binary_sensor.visonic_mct340_e_0aaf914a_1:
   friendly_name: Front Door
 device_tracker.bdii:
   friendly_name: BDII
@@ -69,7 +68,6 @@ switch.bathroom_fan_switch_switch:
   friendly_name: Bathroom Fan Switch
   icon: mdi:fan
 switch.garage_door_opener_switch:
-  google_assistant: false
   icon: mdi:garage
 binary_sensor.garage_door:
   icon: mdi:garage
@@ -82,23 +80,11 @@ device_tracker.mikes_ping:
 sensor.bedroom_temp:
   icon: mdi:thermometer
 binary_sensor.garage_door_sensor:
-  device_class: opening
+  device_class: garage_door
 switch.bedroom_fan_outlet:
   icon: mdi:power-socket-us
-light.5ccf7f2a183e_19216886136:
+light.5ccf7f2a183e:
   friendly_name: Light Strip
-light.fortrezz_siren_level:
-  google_assistant: false
-input_boolean.jake_presence:
-  google_assistant: false
-input_boolean.lydia_presence:
-  google_assistant: false
-input_boolean.mike_presence:
-  google_assistant: false
-input_boolean.megan_presence:
-  google_assistant: false
-input_boolean.watch_chromecast:
-  google_assistant: true
 device_tracker.tile_wallet:
   friendly_name: Jake's Wallet
 binary_sensor.jakes_home:
@@ -117,3 +103,113 @@ device_tracker.lydia2:
   friendly_name: Lydia's Phone
 device_tracker.lydia3:
   friendly_name: Lydia's Phone
+switch.backyard_switch:
+  icon: mdi:spotlight-beam
+switch.vizio_sound_bar_volume_up:
+  icon: mdi:volume-plus
+switch.vizio_sound_bar_volume_mute:
+  icon: mdi:volume-mute
+  assumed_state: false
+switch.vizio_sound_bar_volume_down:
+  icon: mdi:volume-minus
+script.vizio_volume_down:
+  friendly_name: Vizio Volume Down
+  icon: mdi:volume-minus
+script.vizio_volume_up:
+  friendly_name: Vizio Volume Up
+  icon: mdi:volume-plus
+light.fortrezz_siren_level:
+  icon: mdi:alarm-light
+sensor.front_door_lock_battery:
+  icon: mdi:battery
+sensor.bedroom_motion_battery:
+  icon: mdi:battery
+sensor.bedroom_window_battery:
+  icon: mdi:battery
+sensor.bathroom_door_battery:
+  icon: mdi:battery
+sensor.bathroom_motion_battery:
+  icon: mdi:battery
+sensor.bathroom_sink_leak_battery:
+  icon: mdi:battery
+sensor.bathroom_temp_humidity_battery:
+  icon: mdi:battery
+sensor.garage_door_battery:
+  icon: mdi:battery
+sensor.garage_door_house_battery:
+  icon: mdi:battery
+sensor.kitchen_leak_battery:
+  icon: mdi:battery
+sensor.smoke_alarm_battery:
+  icon: mdi:battery
+switch.sirens:
+  friendly_name: Sirens
+  icon: mdi:alarm-light
+sensor.driveway_camera_battery:
+  icon: mdi:battery
+sensor.backyard_camera_battery:
+  icon: mdi:battery
+sensor.upstairs_camera_battery:
+  icon: mdi:battery
+sensor.jake_battery:
+  icon: mdi:battery
+sensor.lydia_battery:
+  icon: mdi:battery
+sensor.megan_battery:
+  icon: mdi:battery
+sensor.mike_battery:
+  icon: mdi:battery
+input_boolean.mike_presence:
+  icon: mdi:home-map-marker
+input_boolean.megan_presence:
+  icon: mdi:home-map-marker
+input_boolean.lydia_presence:
+  icon: mdi:home-map-marker
+input_boolean.jake_presence:
+  icon: mdi:home-map-marker
+light.osram_lightify_a19_rgbw:
+  friendly_name: OSRAM 1
+light.osram_lightify_a19_rgbw:
+  friendly_name: OSRAM 2
+light.osram_lightify_a19_rgbw:
+  friendly_name: OSRAM 3
+light.osram_lightify_a19_rgbw:
+  friendly_name: OSRAM 4
+sensor.bathroom_motion_motion_sensor:
+  friendly_name: Bathroom Motion Sensor
+switch.sanyo_tv_power:
+  icon: mdi:television
+  assumed_state: false
+switch.sanyo_tv_volume_up:
+  icon: mdi:volume-plus
+switch.sanyo_tv_volume_mute:
+  icon: mdi:volume-mute
+switch.sanyo_tv_volume_down:
+  icon: mdi:volume-minus
+switch.vizio_sound_bar_power:
+  icon: mdi:speaker
+  assumed_state: false
+switch.vizio_sound_bar_input_digital:
+  icon: mdi:video-input-component
+switch.sanyo_tv_input_change:
+  icon: mdi:video-input-component
+switch.watch_chromecast:
+  icon: mdi:google-chrome
+  assumed_state: false
+switch.watch_roku:
+  icon: mdi:cast
+  assumed_state: false
+switch.vizio_sound_bar_volume_mute1:
+  friendly_name: Vizio Sound Bar Volume Mute
+  icon: mdi:volume-mute
+switch.sanyo_tv_power1:
+  friendly_name: Sanyo TV Power
+  icon: mdi:television
+switch.vizio_sound_bar_power1:
+  friendly_name: Vizio Sound Bar Power
+  icon: mdi:speaker
+script.sanyo_tv_input_change:
+  friendly_name: Sanyo TV Input Change
+  icon: mdi:video-input-component
+input_number.thermostat_target_temp:
+  icon: mdi:thermometer-lines

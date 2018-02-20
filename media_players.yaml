@@ -8,3 +8,38 @@
     token: !secret plex_token
     ssl: True
     verify: False
+
+########################
+### Broadlink RM Pro ###
+########################
+  - platform: universal
+    name: TV Volume
+    children:
+      - media_player.bedroom_tv
+      - media_player.bedroom_home
+    commands:
+      turn_on:
+        service: input_select.select_option
+        data: 
+          entity_id: input_select.tv_activities
+          option: Watch Chromecast
+      turn_off:
+        service: input_select.select_option
+        data: 
+          entity_id: input_select.tv_activities
+          option: Power Off
+      volume_up:
+        service: switch.turn_on
+        data: 
+          entity_id: switch.vizio_sound_bar_volume_up
+      volume_down:
+        service: switch.turn_on
+        data: 
+          entity_id: switch.vizio_sound_bar_volume_down
+      volume_mute:
+        service: switch.toggle
+        data: 
+          entity_id: switch.vizio_sound_bar_volume_mute
+    attributes:
+      state: switch.vizio_sound_bar_power
+      is_volume_muted: switch.vizio_sound_bar_volume_mute

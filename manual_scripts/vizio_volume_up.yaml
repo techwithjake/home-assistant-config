@@ -1,0 +1,9 @@
+vizio_volume_up:
+  sequence:
+  - data:
+      entity_id: switch.vizio_sound_bar_volume_up
+    service: switch.turn_on
+#  - delay: 00:00:01
+#  - data:
+#      entity_id: switch.vizio_sound_bar_volume_up
+#    service: switch.turn_off

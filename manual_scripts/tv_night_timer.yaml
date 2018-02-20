@@ -1,0 +1,7 @@
+tv_night_timer:
+  sequence:
+  - delay: 01:00:00
+  - data:
+      entity_id: input_select.tv_activities
+      option: "Power Off"
+    service: input_select.option

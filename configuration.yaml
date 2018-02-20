@@ -14,6 +14,10 @@ homeassistant:
   # Customize Devices
   customize: !include customize.yaml
 
+  # External Drives
+  whitelist_external_dirs:
+    - /mnt/e04c2c95-1c1c-4c52-b0c9-feb72f3e0412/dietpi_userdata/homeassistant
+
 ###################################################
 ### Show links to resources in log and frontend ###
 ###################################################
@@ -21,7 +25,7 @@ homeassistant:
 
 # Enables the frontend
 frontend:
-  javascript_version: latest
+#  javascript_version: latest
 
 # Enables cloud configuration
 cloud:
@@ -31,6 +35,8 @@ cloud:
         - script
         - automation
         - scene
+        - group
+        - cover
 
 # Enables configuration UI
 config:
@@ -43,6 +49,7 @@ http:
   ssl_key: !secret ssl_key
   base_url: !secret base_url
   # server_host: !secret host_ip
+  # server_port: 443
   ip_ban_enabled: true
   login_attempts_threshold: 5
 
@@ -77,13 +84,27 @@ conversation:
 ### Recorder - Enables storing details ###
 ##########################################
 recorder:
-  purge_interval: 7
-  purge_keep_days: 10
+  purge_interval: 3
+  purge_keep_days: 5
+  exclude:
+    entities:
+      - sensor.time__date
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_summary
+      - sun.sun
+      - sensor.moon
 
 #############################################################
 ### Enables support for tracking state changes over time ###
 #############################################################
 history:
+  exclude:
+    entities:
+      - sensor.time__date
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_summary
+      - sun.sun
+      - sensor.moon
 
 ####################################
 ### View all events in a logbook ###
@@ -244,14 +265,14 @@ remote: !include remotes.yaml
 #####################
 ### Media PLayers ###
 #####################
-#media_player: !include media_players.yaml
+media_player: !include media_players.yaml
 
 ##############################
 ### ZigBee Home Automation ###
 ##############################
-#zha:
-#  usb_path: /dev/ttyUSB1
-#  database_path: /home/homeassistant/.homeassistant/zigbee.db
+zha:
+  usb_path: /dev/ttyUSB1
+  database_path: /home/homeassistant/.homeassistant/zigbee.db
 
 ##############
 ### Z-Wave ###
@@ -267,17 +288,6 @@ zwave:
 ### Emulated Hue ###
 ####################
 #emulated_hue:
-#  type: google_home
-#  host_ip: !secret host_ip
-#  listen_port: 80
-#  expose_by_default: true
-#  exposed_domains:
-#   - light
-#   - switch
-#   - fan
-#   - input_boolean
-#emulated_hue 1:
-#  type: alexa
 #  host_ip: !secret host_ip
 #  expose_by_default: true
 #  exposed_domains:
@@ -304,12 +314,12 @@ intent_script: !include intents.yaml
 ##########################
 ### Panel iFrames List ###
 ###########################
-panel_iframe: !include panel_iframes.yaml
+#panel_iframe: !include panel_iframes.yaml
 
 #####################
 ### Weblinks List ###
 #####################
-#weblink: !include weblinks.yaml
+weblink: !include weblinks.yaml
 
 ###################
 ### Alarm Panel ###
@@ -334,22 +344,12 @@ alert: !include alerts.yaml
 ####################
 ### Telegram Bot ###
 ####################
-telegram_bot: !include telegram_bot.yaml
+#telegram_bot: !include telegram_bot.yaml
 
 ########################
 ### Google Assistant ###
 ########################
-google_assistant:
-  project_id: !secret ga_project_id
-  client_id: !secret ga_client_id
-  access_token: !secret ga_access_token
-  api_key: !secret ga_api_key
-  exposed_domains:
-   - light
-   - switch
-   - fan
-   - input_boolean
-  expose_by_default: true
+google_assistant: !include google_assistant.yaml
 
 ######################
 ### Python Scripts ###
@@ -364,3 +364,30 @@ google_domains:
   username: !secret g_domains_username
   password: !secret g_domains_password
   timeout: 30
+
+##############
+### Linode ###
+##############
+linode:
+  access_token: !secret linode_key
+
+################
+### Calendar ###
+################
+#calendar: !include calendar.yaml
+
+###############
+### Mailgun ###
+###############
+mailgun:
+  domain: !secret mg_domain
+  api_key: !secret mg_api_key
+
+###################
+### Philips Hue ###
+###################
+hue:
+  bridges:
+    - host: !secret ph_bridge_ip
+      allow_unreachable: true
+      allow_hue_groups: false

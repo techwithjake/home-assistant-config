@@ -1,4 +1,5 @@
 default_view:
+  name: Home
   view: yes
   entities:
     - group.alarm_panel_group
@@ -25,9 +26,20 @@ Bedroom View:
     - group.bedroom_fan_group
     - group.bedroom_switches_group
     - group.bedroom_sensors_group
+    - group.bedroom_tv_group
     - group.google_maps_group
-    - group.bedroom_chromecasts_group
-    - group.harmony_hub_group
+#    - group.bedroom_chromecasts_group
+
+#####################
+### Bedroom Media ###
+#####################
+Bedroom Media View:
+  name: Bedroom Media
+  view: yes
+  entities:
+    - group.media_controls_group
+    - group.sanyo_tv_group
+    - group.vizio_soundbar_group
 
 ##################
 ### Front Door ###
@@ -113,11 +125,13 @@ Server View:
   name: Server
   view: yes
   entities:
-    - group.server_group
+    - group.raspberry_pi_group
+#    - group.c2_group
     - group.wifi_group
     - group.internet_speed_group
     - group.plex_group
-    - group.pihole_group
+    - group.linode_group
+#    - group.pihole_group
 #    - group.deitpi_services_group
 
 #################
@@ -127,7 +141,13 @@ Battery View:
   name: Battery Levels
   view: yes
   entities:
+    - group.presence_batteries_group
     - group.bedroom_batteries_group
+    - group.front_door_batteries_group
+    - group.bathroom_batteries_group
+    - group.garage_batteries_group
+    - group.kitchen_batteries_group
+    - group.arlo_batteries_group
 
 ########################################
 ########### Groups #####################
@@ -137,15 +157,16 @@ Battery View:
 ########## Home Page Groups ############
 ########################################
 
-#############################
-### Alarm Panel Home Page ###
+################################ Alarm Panel Home Page ###
 #############################
 Alarm Panel Group:
   name: Alarm Panel
   entities:
     - alarm_control_panel.alarm_panel
     - binary_sensor.alarm_panel_motion
-    - switch.aeotec_siren_switch
+#    - switch.aeotec_siren_switch
+#    - light.fortrezz_siren_level
+    - switch.sirens
 
 #########################
 ### Bedroom Home Page ###
@@ -168,7 +189,8 @@ Bathroom Home Group:
     - switch.bathroom_light_switch_switch
     - switch.bathroom_fan_switch_switch
     - binary_sensor.bathroom_door
-    - binary_sensor.bathroom_motion
+#    - binary_sensor.bathroom_motion
+    - sensor.bathroom_motion_motion_sensor
 
 ########################
 ### Garage Home Page ###
@@ -211,11 +233,11 @@ Thermostat Home Group:
   name: Thermostat
   entities:
     - sensor.thermostat_temperature
-    - climate.thermostat_cooling_1
-    - climate.thermostat_heating_1
+#    - climate.thermostat_cooling_1
+#    - climate.thermostat_heating_1
+    - input_number.thermostat_target_temp
     - input_select.thermostat_operation_mode
     - input_select.theromstat_fan_mode
-    - input_slider.thermostat_target_temp
 
 ################################
 ### Time & Weather Home Page ###
@@ -223,11 +245,10 @@ Thermostat Home Group:
 Time and Weather Home Group:
   name: Time & Weather
   entities:
-    - sensor.time
-    - sensor.date
-    - sensor.internet_time
-    - sensor.dark_sky_summary
+    - sensor.time__date
+#    - sensor.internet_time
     - sensor.dark_sky_temperature
+    - sensor.dark_sky_summary
     - sun.sun
     - sensor.moon
 
@@ -243,11 +264,15 @@ Bedroom Lights Group:
   entities:
     - light.bedroom_lights
     - switch.bedroom_light_switch_switch
-    - light.bed_bulb
-    - light.nightstand_bulb
-    - light.desk_bulb
-    - light.window_bulb
-    - light.light
+#    - light.bed_bulb
+#    - light.nightstand_bulb
+#    - light.desk_bulb
+#    - light.window_bulb
+    - light.osram_lightify_a19_rgbw
+    - light.osram_lightify_a19_rgbw
+    - light.osram_lightify_a19_rgbw
+    - light.osram_lightify_a19_rgbw
+    - light.5ccf7f2a183e
 Bedroom Fan Group:
   name: Fan
   entities:
@@ -267,7 +292,12 @@ Bedroom Sensors Group:
     - sensor.bedroom_window_temp
     - binary_sensor.bedroom_motion
     - sensor.bedroom_motion_temp
-    - binary_sensor.esp_motion
+#    - binary_sensor.esp_motion
+Bedroom TV Group:
+  name: Bedroom TV
+  entities:
+    - media_player.tv_volume
+#    - input_select.tv_activities
 Bedroom Chromecasts Group:
   name: Chromecasts
   entities:
@@ -279,10 +309,35 @@ Google Maps Group:
   name: Google Maps
   entities:
     - sensor.time_to_work
-Harmony Hub Group:
-  name: Harmony Hub
+    - calendar.all_projects
+
+#####################################
+### Bedroom Media Internal Groups ###
+#####################################
+Media Controls Group:
+  name: Media Controls
   entities:
-    - input_select.harmony_hub_activities
+    - input_select.tv_activities
+#    - switch.watch_chromecast
+#    - switch.watch_roku
+Sanyo TV Group:
+  name: Sanyo TV
+  entities:
+    - switch.sanyo_tv_power
+    - script.sanyo_tv_input_change
+#    - switch.sanyo_tv_volume_up
+#    - switch.sanyo_tv_volume_down
+#    - switch.sanyo_tv_volume_mute
+    - input_select.multiplexer_input
+Vizio Soundbar Group:
+  name: Vizio Soundbar
+  entities:
+    - switch.vizio_sound_bar_power
+#    - switch.vizio_sound_bar_input_digital
+    - script.vizio_volume_up
+    - script.vizio_volume_down
+    - switch.vizio_sound_bar_volume_mute
+    - input_select.vizio_soundbar_input
 
 ##################################
 ### Front Door Internal Groups ###
@@ -314,7 +369,8 @@ Bathroom Sensors Group:
   name: Sensors
   entities:
     - binary_sensor.bathroom_door
-    - binary_sensor.bathroom_motion
+    - sensor.bathroom_motion_motion_sensor
+#    - binary_sensor.bathroom_motion
     - sensor.bathroom_humidity
 
 ###############################
@@ -324,6 +380,7 @@ Outside Switches Group:
   name: Switches
   entities:
     - switch.driveway_light_switch_switch
+    - switch.backyard_light_switch
     - switch.hotplate_switch
 Outside Sensors Group:
   name: Sensors
@@ -345,20 +402,27 @@ Cameras Group:
     - sensor.last_upstairs
     - camera.upstairs
     - camera.living_room
+    - camera.living_room_2
     - camera.alarm_panel
-    - camera.front_door
+#    - camera.front_door
     - camera.yi_camera
 
 ##############################
 ### Server Internal Groups ###
 ##############################
-Server Group:
-  name: Server
+Raspberry Pi Group:
+  name: RPi
   entities:
-    - sensor.cpu_use
-    - sensor.ram_available
-    - sensor.average_load_1m
+    - sensor.processor_use
+    - sensor.memory_free
+    - sensor.load_15m
     - sensor.disk_free_mnte04c2c951c1c4c52b0c9feb72f3e0412
+    - sensor.homeassistant_v2db
+    - sensor.homeassistantlog
+#C2 Group:
+#  name: C2
+#  entities:
+#    - 
 WiFi Group:
   name: WiFi
   entities:
@@ -372,6 +436,10 @@ Plex Group:
   name: Plex
   entities:
     - sensor.dietpic2_plex
+Linode Group:
+  name: Linode
+  entities:
+    - binary_sensor.mailinabox
 PiHole Group:
   name: Pi-Hole
   entities:
@@ -432,10 +500,46 @@ Mikes Presence Group:
 ###############################
 ### Battery Internal Groups ###
 ###############################
+Presence Batteries Group:
+  name: Presence Batteries
+  entities:
+    - sensor.jake_battery
+    - sensor.megan_battery
+    - sensor.lydia_battery
+    - sensor.mike_battery
 Bedroom Batteries Group:
   name: Bedroom Batteries
   entities:
     - sensor.bedroom_door_battery
+    - sensor.bedroom_motion_battery
+    - sensor.bedroom_window_battery
+Bathroom Batteries Group:
+  name: Bathroom Batteries
+  entities:
+    - sensor.bathroom_door_battery
+    - sensor.bathroom_motion_battery
+    - sensor.bathroom_sink_leak_battery
+    - sensor.bathroom_temp_humidity_battery
+Front Door Batteries Group:
+  name: Front Door Batteries
+  entities:
+    - sensor.front_door_lock_battery
+Garage Batteries Group:
+  name: Garage Batteries
+  entities:
+    - sensor.garage_door_battery
+    - sensor.garage_door_house_battery
+Kitchen Batteries Group:
+  name: Kitchen Batteries
+  entities:
+    - sensor.kitchen_leak_battery
+    - sensor.smoke_alarm_battery
+Arlo Batteries Group:
+  name: Arlo Batteries
+  entities:
+    - sensor.battery_level_driveway
+    - sensor.battery_level_backyard
+    - sensor.battery_level_upstairs
 
 #########################
 #### Everything Group ###

@@ -7,6 +7,3 @@ home:
       entity_id: input_select.mode
       option: Home
     service: input_select.select_option
-  - data:
-      event: someone_arrived
-    service: ifttt.trigger

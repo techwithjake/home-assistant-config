@@ -1,0 +1,10 @@
+watch_roku_off:
+  sequence:
+  - data:
+      entity_id:
+      - switch.sanyo_tv_power
+      - switch.vizio_sound_bar_power
+      - switch.hdmi_multiplexer_input_2
+      - switch.watch_roku
+    service: switch.turn_off
+    

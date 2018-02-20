@@ -1,55 +1,73 @@
-#  - platform: mqtt
-#    name: "Front Porch Light Switch"
-#    state_topic: "smartthings/Front Porch Light Switch/switch"
-#    command_topic: "smartthings/Front Porch Light Switch/switch"
-#    payload_on: "on"
-#    payload_off: "off"
-#    retain: true
-#  - platform: mqtt
-#    name: "Driveway Light Switch"
-#    state_topic: "smartthings/Driveway Light Switch/switch"
-#    command_topic: "smartthings/Driveway Light Switch/switch"
-#    payload_on: "on"
-#    payload_off: "off"
-#    retain: true
-#  - platform: mqtt
-#    name: "Hotplate"
-#    state_topic: "smartthings/Hotplate/switch"
-#    command_topic: "smartthings/Hotplate/switch"
-#    payload_on: "on"
-#    payload_off: "off"
-#    retain: true
   - platform: mqtt
     name: "Bedroom Fan Outlet"
     state_topic: "smartthings/Bedroom Fan Outlet/switch"
     command_topic: "smartthings/Bedroom Fan Outlet/switch"
     payload_on: "on"
     payload_off: "off"
+    payload_available: "Online"
+    payload_not_available: "Offline"
     retain: true
-
+    qos: 1
   - platform: mqtt
     name: "Curling Iron"
     state_topic: "smartthings/Curling Iron/switch"
     command_topic: "smartthings/Curling Iron/switch"
     payload_on: "on"
     payload_off: "off"
+    payload_available: "Online"
+    payload_not_available: "Offline"
     retain: true
-
+    qos: 1
   - platform: mqtt
     name: "Bedroom TV Outlet"
     state_topic: "smartthings/Bedroom TV Outlet/switch"
     command_topic: "smartthings/Bedroom TV Outlet/switch"
     payload_on: "on"
     payload_off: "off"
+    payload_available: "Online"
+    payload_not_available: "Offline"
     retain: true
-
+    qos: 1
   - platform: mqtt
     name: "Christmas Tree Outlet"
     state_topic: "smartthings/Christmas Tree Outlet/switch"
     command_topic: "smartthings/Christmas Tree Outlet/switch"
     payload_on: "on"
     payload_off: "off"
+    payload_available: "Online"
+    payload_not_available: "Offline"
     retain: true
+    qos: 1
+  - platform: mqtt
+    name: "Backyard Light Switch"
+    state_topic: "stat/backyard-switch/POWER"
+    command_topic: "cmnd/backyard-switch/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: true
+    qos: 1
+
+#########################
+### Template Switches ###
+#########################
+  - platform: template
+    switches:
+      sirens:
+        value_template: "{{ is_state('switch.aeotec_siren_switch', 'on') }}"
+        turn_on:
+          service: homeassistant.turn_on
+          data:
+            entity_id:
+              - switch.aeotec_siren_switch
+              - light.fortrezz_siren_level
+        turn_off:
+          service: homeassistant.turn_off
+          data:
+            entity_id:
+              - switch.aeotec_siren_switch
+              - light.fortrezz_siren_level
 
 ####################
 ### Command Line ###
@@ -60,3 +78,139 @@
         command_off: "/DietPi/dietpi/dietpi-services restart"
         command_on: "/DietPi/dietpi/dietpi-services status"
         friendly_name: DietPi Services
+      watch_chromecast:
+        command_on: "/root/hass/turn-switch-on"
+        command_off: "/root/hass/turn-switch-off"
+        friendly_name: Watch Chromecast
+      watch_roku:
+        command_on: "/root/hass/turn-switch-on"
+        command_off: "/root/hass/turn-switch-off"
+        friendly_name: Watch Roku
+      watch_netflix:
+        command_on: "/root/hass/turn-switch-on"
+        command_off: "/root/hass/turn-switch-off"
+        friendly_name: Watch Netflix
+      listen_to_music:
+        command_on: "/root/hass/turn-switch-on"
+        command_off: "/root/hass/turn-switch-off"
+        friendly_name: Listen to Music
+      bedroom_fan_high:
+        command_on: "/root/hass/turn-switch-on"
+        command_off: "/root/hass/turn-switch-off"
+        friendly_name: Bedroom Fan High
+      bedroom_fan_medium:
+        command_on: "/root/hass/turn-switch-on"
+        command_off: "/root/hass/turn-switch-off"
+        friendly_name: Bedroom Fan Medium
+      bedroom_fan_low:
+        command_on: "/root/hass/turn-switch-on"
+        command_off: "/root/hass/turn-switch-off"
+        friendly_name: Bedroom Fan Low
+
+########################
+### Broadlink RM Pro ###
+########################
+  - platform: broadlink
+    host: !secret broadlink_ip
+    mac: !secret broadlink_mac
+    friendly_name: Broadlink
+    switches:
+      sanyo_tv_power:
+        friendly_name: Sanyo TV Power
+        command_on: 'JgBQAAABJpQTExMSFBEUNRM2FDYSExQRFDUUNhM2ExIUERQRFTUUNRUQFDUTExMSEzYSExQRFBEUNhMSEzYUNRQSEzYTNhM3EgAFKAABKEgTAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABJpQTExMSFBEUNRM2FDYSExQRFDUUNhM2ExIUERQRFTUUNRUQFDUTExMSEzYSExQRFBEUNhMSEzYUNRQSEzYTNhM3EgAFKAABKEgTAA0FAAAAAAAAAAA='
+      sanyo_tv_volume_up:
+        friendly_name: Sanyo TV Volume Up
+        command_on: 'JgBYAAABKJIUEhQRExIUNRM3EjcTEhQREjcTNxQ1FBEUERQRFDYTNhQRFDYSNxI3ExIUERIUExISNxITFBEUERQ2EzYTNhQ2EgAFKAABKEgUAAxOAAEnSRQADQU='
+      sanyo_tv_volume_down:
+        friendly_name: Sanyo TV Volume Down
+        command_on: 'JgBYAAABKJMTEhITFBEUNRU1EzYUERQRFDYTNhI3EhMUEhMSFDUSNxQ2EjcSNxM3ExIUERQRFBEUERQRFBEUERQ2FDUTNhQ2EwAFJwABKEgUAAxOAAEoSBMADQU='
+      sanyo_tv_volume_mute:
+        friendly_name: Sanyo TV Volume Mute
+        command_on: 'JgBYAAABJZUUERQSERQUNRQ1EzcTEhQRFTQTNxM2EhMUERQRFDYTNhITFBEUERQ2EjcUERQRExIUNhI3EzYTEhQRFDYVNBQ1FAAFJwABJ0kTAAxOAAEoSRQADQU='
+      sanyo_tv_input_change:
+        friendly_name: Sanyo TV Input Change
+        command_on: 'JgBYAAABKJMUERQRFBEUNhI3EjcTEhQSEzYUNRM2FBIRFBQRFDUUNhM2EzYUERQRFDYTEhQRFBEUERQRFDYTNhITFDUUNhI3FAAFJgABKEkUAAxNAAEoSBQADQU='
+      vizio_sound_bar_power:
+        friendly_name: Vizio Sound Bar Power
+        command_on: 'JgBYAAABKJMUERQRFRETEhMSFBEUERQRFDUUNhQ1EzYUNhI3FDUUNhMSFBEUERQRFBEUERQ2ExIUNRQ1FDYTNhM2EzcSExQ1FAAFJwABJ0kUAAxNAAEmSxMADQU='
+        command_off: 'JgBYAAABKJMUERQRFRETEhMSFBEUERQRFDUUNhQ1EzYUNhI3FDUUNhMSFBEUERQRFBEUERQ2ExIUNRQ1FDYTNhM2EzcSExQ1FAAFJwABJ0kUAAxNAAEmSxMADQU='
+      vizio_sound_bar_volume_up:
+        friendly_name: Vizio Sound Bar Volume Up
+        command_on: 'JgBYAAABKJMTEhQRFBEUERQRFBEUERQSEzYTNhM3EjcTNhM3EjcTNhQ2EhMUERQRFBEUERQ1FBISExQ1EzYUNhI3FDUTExM2EwAFJwABKEgTAAxPAAEnSRQADQU='
+      vizio_sound_bar_volume_down:
+        friendly_name: Vizio Sound Bar Volume Down
+        command_on: 'JgBYAAABJ5MUERIUExIUERQRFRAUERQREjgSNxQ1EzcTNhI3EjgTNhM2ExIUNhUQFBEUERQ1FBITEhQ1EhMUNRQ2EzYTEhQ2EwAFJwABKEgTAAxOAAEoSRUADQU='
+      vizio_sound_bar_volume_mute:
+        friendly_name: Vizio Sound Bar Volume Mute
+        command_on: 'JgBYAAABJZUUERQREhQSExQRFBEUERQRFDUUNhI3FDUTNxE4FDUTNxQRFBEUERQ1ExMUERQ1FBEUNRM3FDUSExI4EzYSExQ1FAAFJwABJ0kTAAxOAAEoSRMADQU='
+        command_off: 'JgBYAAABJZUUERQREhQSExQRFBEUERQRFDUUNhI3FDUTNxE4FDUTNxQRFBEUERQ1ExMUERQ1FBEUNRM3FDUSExI4EzYSExQ1FAAFJwABJ0kTAAxOAAEoSRMADQU='
+      vizio_sound_bar_input_digital:
+        friendly_name: Vizio Sound Bar Input Digital
+        command_on: 'JgBQAAABKJMUERQRFBEUEhMSExIUERMSEjcTNxQ1FDUUNhI3EzYUNhM2EhMUERQ2EhMTEhE4FDUUEhM2FDUUERQ2EjcUERQRFAAFJgABKEkTAA0FAAAAAAAAAAA='
+      vizio_sound_bar_input_optical:
+        friendly_name: Vizio Sound Bar Input Optical
+        command_on: 'JgBQAAABJ5QSExMSEhMTEhMSFBESExMTEjcTNhM3ETgSNxM3EjcTNhMSExITExE4ExITEhM2EzcTNhM2EzcSExI3EzcSExITEgAFKAABJksSAA0FAAAAAAAAAAA='
+      vizio_sound_bar_input_bluetooth:
+        friendly_name: Vizio Sound Bar Input Bluetooth
+        command_on: 'JgBQAAABJ5MTExITEhMSExITExITEhMSEjgSNxI3EzcSNxM2EzcSNxMSEzYTExEUERQSNxMSExITNxITEjcTNhM3ExISNxM2EwAFKAABJkoTAA0FAAAAAAAAAAA='
+      vizio_sound_bar_input_hdmi:
+        friendly_name: Vizio Sound Bar Input HDMI
+        command_on: 'JgBQAAABJ5IUExITERQTEhMSExITEhMSEzcTNhM2EzcTNhM2EjgSNxM2EzcSExM2EhMTNxEUEzYTEhMSEzcSExI3ExISOBITEQAFKQABJ0kTAA0FAAAAAAAAAAA='
+      vizio_sound_bar_input_hdmi_arc:
+        friendly_name: Vizio Sound Bar Input HDMI Arc
+        command_on: 'JgBQAAABJ5QTEhMSExITExITExISExMSEzYTNxI3EzYTNxM2EzYTNxITEzYSExM3EjcTEhITEzYTNxMSEzYTEhMTETgROBMSEwAFJwABJ0oTAA0FAAAAAAAAAAA='
+      vizio_sound_bar_input_aux_1:
+        friendly_name: Vizio Sound Bar Input Aux 1
+        command_on: 'JgBQAAABKJMTEhMSExITExITERQTEhITEjcTNxI3EzYTNxM2EzYTNxI3ExITEhMSEjgSNxITEzYTExI3EjcTNxITExISNxMSEwAFJwABJ0oSAA0FAAAAAAAAAAA='
+      vizio_sound_bar_input_aux_2:
+        friendly_name: Vizio Sound Bar Input Aux 2
+        command_on: 'JgBQAAABJ5QTEhMSExITExITERQTEhMSEzYTNxI3EjcTNxI3EzYTNxITEzYTEhMSEzcSNxMSEzYTNxITEzYTNxITEhMTNhMSEwAFKAABJkoTAA0FAAAAAAAAAAA='
+      vizio_sound_bar_input_usb:
+        friendly_name: Vizio Sound Bar Input USB
+        command_on: 'JgBQAAABJ5MTExITERQRFBMSEhMTEhMSEzcSNxM2EzcROBM2EzcSNxM2ExISFBITExISNxMSEjgSExI3EjcTNxM2ExITNhMTEgAFKAABJ0kTAA0FAAAAAAAAAAA='
+      hdmi_multiplexer_input_1:
+        friendly_name: HDMI Multiplexer Input 1
+        command_on: 'JgBQAAABKJMUERQRFBEUERQRFBEUEhM2FDUUNhM2EjcUNhI3EzYTEhQSEzYRFBQRFBEUERQRFBEUNhITEzYTNxM2EzYUNhQ1EgAFKAABKEkSAA0FAAAAAAAAAAA='
+      hdmi_multiplexer_input_2:
+        friendly_name: HDMI Multiplexer Input 2
+        command_on: 'JgDYAAABKJMUEBETExITERMRERMTEhE4EzYTNxM2EzYUNhQ1EzYTEhAUERMTNhMSEhITERMRExIQORM2ExETNxM2EzYTNxE4EwAFEwABJZUUERMRExETEREUEBQRExE4EzcTNhM2FDYROBQ1EzcRExETExIQORMRExERFBAUERMROBM3ExETNhM3EzYTNhQ2EQAFFAABKJMUEBMRExIQFBMRERMRFBE4EzYTNxQ1EjcUNhM2FDUTEhAUEhITNhMSEhIRExETEhMSNxM2FBASOBE4EzYUNhQ1FAANBQ=='
+      hdmi_multiplexer_input_3:
+        friendly_name: HDMI Multiplexer Input 3
+        command_on: 'JgBQAAABJ5QUERQRFBEUERQRFBEUEhM2FDUTNhQ2EzYUNhM2EzYUERQ2FBEUNRQRFBEUERQSExITEhQ1FBESNxI4EjcTNhQ2EgAFKAABKEkSAA0FAAAAAAAAAAA='
+      hdmi_multiplexer_input_4:
+        friendly_name: HDMI Multiplexer Input 4
+        command_on: 'JgBYAAABKJIUEhMSFBEUERQRFBEUERI3FDYSNxQ2EzYTNhM3EzYUERITEjcUNhITFBEUERQRExIUNhITFBEUNRQ2EzYUNRQ2EwAFJwABKEgTAAxOAAEpSBIADQU='
+      hdmi_multiplexer_input_5:
+        friendly_name: HDMI Multiplexer Input 5
+        command_on: 'JgBYAAABJ5MVEBQSExITEhQRFBEUERQ1FDYTNhQ1EjgSNxM2EjgUERQRFBEUERQ2ExIUERQRFBEUNRQ2FDUUERQ1FDYTNhQ1EwAFKAABJ0kUAAxNAAEoSRMADQU='
+      space_heater_power:
+        friendly_name: Space Heater Power
+        command_on: 'JgDaACsNKQ4PKSoNKg0PKQ8pDykPKQ8pDioq7CsNKg0PKSoNKg0PKQ4qDykOKg4qDioq7CkPKQ8OKioNJxAPKQ4qDioPKQ4qDioq7CsNKg0PKSoNKg0PKQ8pDioQKBAoECgq7CsNKg0PKSoOKQ4OKg0rDioOKg8pDykq7CoOKQ4PKSoNKQ4PKQ8pDykPKQ0rDykq7CoOKg0PKSoNKg0PKQ8pDykPKQ8pDykq7CsNKg4OKSoOJxAPKQ4qDykNKw4qDioo7ioOKA8PKSoNKg0PKQ0rDioPKQ4qDioqAA0FAAAAAAAAAAAAAAAAAAA='
+        command_off: 'JgDaACsNKQ4PKSoNKg0PKQ8pDykPKQ8pDioq7CsNKg0PKSoNKg0PKQ4qDykOKg4qDioq7CkPKQ8OKioNJxAPKQ4qDioPKQ4qDioq7CsNKg0PKSoNKg0PKQ8pDioQKBAoECgq7CsNKg0PKSoOKQ4OKg0rDioOKg8pDykq7CoOKQ4PKSoNKQ4PKQ8pDykPKQ0rDykq7CoOKg0PKSoNKg0PKQ8pDykPKQ8pDykq7CsNKg4OKSoOJxAPKQ4qDykNKw4qDioo7ioOKA8PKSoNKg0PKQ0rDioPKQ4qDioqAA0FAAAAAAAAAAAAAAAAAAA='
+      space_heater_oscillate:
+        friendly_name: Space Heater Oscillate
+        command_on: 'JgDqACsNKA8PKSoOJxAPKQ0rDSsqDQ8pDioPAAEIKBApDg8pKQ4oDw8pDykNKyoNDykPKQ4AAQkrDSoNDykqDSoNDykPKQ4qKg4OKQ8pDgABCSsNKg4OKSoOKQ4PKQ0rDykqDQ8pDSsOAAEJKw0nEA8pKg0qDQ8pDioOKioNDykPKQ8AAQgrDSgPDykqDSgQDikPKQ4qKw0OKg4qDgABCCsOKQ4PKSoNKQ4PKQ8pDykqDQ8pDioOAAEJKg4qDQ8pKg0qDQ8pDioPKSoNDykPKQ4AAQkrDSoNDykqDikODykPKQ4qKg0PKQ0rDQANBQAAAAAAAAAAAAAAAAAA'
+        command_off: 'JgDqACsNKA8PKSoOJxAPKQ0rDSsqDQ8pDioPAAEIKBApDg8pKQ4oDw8pDykNKyoNDykPKQ4AAQkrDSoNDykqDSoNDykPKQ4qKg4OKQ8pDgABCSsNKg4OKSoOKQ4PKQ0rDykqDQ8pDSsOAAEJKw0nEA8pKg0qDQ8pDioOKioNDykPKQ8AAQgrDSgPDykqDSgQDikPKQ4qKw0OKg4qDgABCCsOKQ4PKSoNKQ4PKQ8pDykqDQ8pDioOAAEJKg4qDQ8pKg0qDQ8pDioPKSoNDykPKQ4AAQkrDSoNDykqDikODykPKQ4qKg0PKQ0rDQANBQAAAAAAAAAAAAAAAAAA'
+      space_heater_cooler:
+        friendly_name: Space Heater Cooler
+        command_on: 'JgAeASsNKQ4PKSoNKg0PKSoNDykQKA8pDykOAAEJKQ8qDQ8pKg0qDg4pKw0PKQ0rDykOKg0AAQkrDikODioqDSoNDykqDQ8pDSsPKQ0rDwABCCkPKg0PKSoNKg0PKSoNDykPKQ4qDykOAAEJKw0qDQ8pKg4oDw8pKg0PKQ0rDioNKxAAAQcqDikODykqDSoNDykqDQ8pDykPKQ4qDgABCSsNKg0PKSoNKg0PKSoODikPKQ4qDioPAAEIKg4qDg4pKg4pDg8pKA8PKQ0rDykNKw4AAQkoECkODykqDSoNDykqDQ8pDioOKg8pDwABCCkPKg0PKSoNKg4OKikODykPKQ0rDioPAAEHKw4nEA8pKg0oDw8pKg0PKQ8pDioNKw4ADQUAAAAAAAAAAAAA'
+      space_heater_hotter:
+        friendly_name: Space Heater Hotter
+        command_on: 'JgDqACkPKQ4PKSgPKg0PKQ8pKg0PKQ4qDykPAAEIKw0qDQ8pKg0oEA4pDioqDg4qDioPKQ8AAQcpECcQDiopDikODykOKigPDykNKw8pDQABCioOKA8PKSoNKg0PKQ8pKg0PKQ4qDioOAAEJKw0oDw8pKg4pDg4qDykqDQ8pDykPKQ0AAQorDSkODykpDioNDykNKyoNDykPKQ4qDwABCCsNKg0PKSoNKg0PKQ4qKg4OKQ8qDykOAAEIKw0qDg4pKg4oDw8pDSsoDw8pDioNKw0AAQopDygPDykqDSgPDykPKSoNDykOKg4qDwANBQAAAAAAAAAAAAAAAAAA'
+      space_heater_timer:
+        friendly_name: Space Heater Timer
+        command_on: 'JgDqACkPKQ4PKSoNKg0PKQ4qDioPKQ8pKg4OAAEIKw0oEA4pKBApDg8pDykPKQ4qDykqDQ8AAQgrDSkODykqDSoNDykOKg4qDioPKSoNDwABCCoOKg0PKSoNKg4OKg4pDioPKQ8qKg0PAAEHKw4pDg8pKg0pDg8pDioPKQ8pDSsoDw8AAQgqDioNDykqDSgPDykPKQ4qDykPKSoNDwABCCsNKA8PKSoOKA8PKQ0rDSsPKQ8pKg0PAAEIKg4pDg8pKg0qDQ8pDykOKg4qDykqDQ8AAQgqDioNDykqDSoNDykPKQ8pDioQKCoODgANBQAAAAAAAAAAAAAAAAAA'
+      space_heater_fan_mode:
+        friendly_name: Space Heater Fan Mode
+        command_on: 'JgDqACsNKg0PKSoOKQ4PKQ0rDioOKioNDykOAAEJKw0pDg8pKg0qDQ8pDSsPKQ8pKA8PKQ8AAQgrDSoNDykqDSgPDykOKg4qDykqDg4pDwABCCsNKBAOKSoOKQ4PKQ4qDykQKCoNDykPAAEIKg4nEA8pKg0qDQ8pDykOKg4qKg0PKQ8AAQgqDioNDykqDSkPDikOKg8pDykoEA8pDwABBysOKQ4PKSoNKQ4PKQ0rDSsOKigPDykNAAEKKw0qDQ8pKA8qDQ8pDykPKQ8pKg0PKQ8AAQgqDioNDykqDikODioNKw8pDykqDQ8pDwANBQAAAAAAAAAAAAAAAAAA'
+      lasko_fan_power:
+        friendly_name: Lasko Fan Power
+        command_on: 'JgBgAAABJpUUNRMTERQUERQRFBEUERQRFBEUNhE4FDUSOBM2EjcTNxQ1FDUTEhQSExITEhQRERQSExQRFDUUNhM2EzYUNhQ1EwAFJwABKEkVAAxMAAEoSRMADE4AASdJFAANBQAAAAAAAAAA'
+        command_off: 'JgBgAAABJpUUNRMTERQUERQRFBEUERQRFBEUNhE4FDUSOBM2EjcTNxQ1FDUTEhQSExITEhQRERQSExQRFDUUNhM2EzYUNhQ1EwAFJwABKEkVAAxMAAEoSRMADE4AASdJFAANBQAAAAAAAAAA'
+      lasko_fan_speed:
+        friendly_name: Lasko Fan Speed
+        command_on: 'JgBgAAABKJMSNxQRFBEUERQSExITEhMSFBEUNRQ2EjcUNRQ2EzYSNxM3EzYSNxMSFBITEhMSFBEUERITFBEUNRM3EzYSNxM3FAAFJgABKEgUAAxOAAEnSRQADE0AASZLEgANBQAAAAAAAAAA'
+      lasko_fan_timer:
+        friendly_name: Lasko Fan Timer
+        command_on: 'JgBgAAABKJIWNBQSExIUERQRERQUERQRFBEUNhE4FDUTNxI3FDUTNxM2FDUUERQ2EhMUERQRFBEUERQRFDYTEhQ1FDYTNhI3EwAFJwABKEkTAAxOAAEoSRMADE4AASdJEgANBQAAAAAAAAAA'

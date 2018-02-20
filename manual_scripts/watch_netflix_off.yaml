@@ -1,0 +1,9 @@
+watch_netflix_off:
+  sequence:
+  - data:
+      entity_id:
+      - switch.sanyo_tv_power
+      - switch.vizio_sound_bar_power
+      - switch.hdmi_multiplexer_input_2
+      - switch.watch_netflix
+    service: switch.turn_off

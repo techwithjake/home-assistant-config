@@ -1,0 +1,20 @@
+tv_off:
+  sequence:
+  - data:
+      entity_id:
+      - switch.watch_chromecast
+      - switch.watch_roku
+      - switch.watch_netflix
+      - switch.listen_to_music
+      - switch.sanyo_tv_power
+      - switch.vizio_sound_bar_power
+    service: switch.turn_off
+  - data:
+      entity_id: input_select.tv_activities
+      option: Power Off
+    service: input_select.select_option
+  - delay: 00:00:30
+  - data:
+      entity_id:
+      - switch.bedroom_tv_outlet
+    service: switch.turn_off

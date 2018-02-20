@@ -2,8 +2,8 @@ mike_left:
   sequence:
   - data:
       message: Mike Left
-    service: notify.pushover
+    service: notify.simplepush_regular
   - data:
       message: Mike Left
-      target: arn:aws:sns:us-west-2:awsnotif:HASS2
+      target: arn:aws:sns:us-west-2:120074880604:HASS2
     service: notify.amazon_sns

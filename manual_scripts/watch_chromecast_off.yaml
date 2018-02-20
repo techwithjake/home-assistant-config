@@ -1,0 +1,9 @@
+watch_chromecast_off:
+  sequence:
+  - data:
+      entity_id:
+      - switch.sanyo_tv_power
+      - switch.vizio_sound_bar_power
+      - switch.hdmi_multiplexer_input_4
+      - switch.watch_chromecast
+    service: switch.turn_off

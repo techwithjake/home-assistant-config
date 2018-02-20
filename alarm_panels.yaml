@@ -1,6 +1,6 @@
   - platform: manual_mqtt
     name: "Alarm Panel"
-  # code: 1050
+  # code: XXXX
     disarm_after_trigger: false
     state_topic: "home/alarm"
     command_topic: "home/alarm/set"
@@ -11,5 +11,7 @@
     retain: true
 
   - platform: arlo
-    home_mode_name: "Disarmed"
-    away_mode_name: "Armed"
+    home_mode_name: "Home"
+#    away_mode_name: "Armed"
+    disarm_mode_name: "Home"
+    night_mode_name: "Night"

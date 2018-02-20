@@ -1,0 +1,12 @@
+goodnight:
+  sequence:
+  - data:
+      entity_id: lock.front_door_lock_locked
+    service: lock.lock
+  - data:
+      entity_id: input_select.mode
+      option: Night
+    service: input_select.select_option
+  - data:
+      entity_id: switch.bedroom_light_switch_switch
+    service: switch.turn_off
