@@ -16,7 +16,7 @@ homeassistant:
 
   # External Drives
   whitelist_external_dirs:
-    - /mnt/e04c2c95-1c1c-4c52-b0c9-feb72f3e0412/dietpi_userdata/homeassistant
+    - /
 
 ###################################################
 ### Show links to resources in log and frontend ###
