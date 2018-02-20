@@ -319,7 +319,7 @@ intent_script: !include intents.yaml
 #####################
 ### Weblinks List ###
 #####################
-weblink: !include weblinks.yaml
+#weblink: !include weblinks.yaml
 
 ###################
 ### Alarm Panel ###

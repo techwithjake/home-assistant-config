@@ -137,8 +137,8 @@
 #################
   - platform: filesize
     file_paths:
-      - /mnt/e04c2c95-1c1c-4c52-b0c9-feb72f3e0412/dietpi_userdata/homeassistant/home-assistant_v2.db
-      - /mnt/e04c2c95-1c1c-4c52-b0c9-feb72f3e0412/dietpi_userdata/homeassistant/home-assistant.log
+      - /
+      - /
 
 ##################################################
 ############ Template Sensors ####################
