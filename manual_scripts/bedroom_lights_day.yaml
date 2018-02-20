@@ -2,10 +2,10 @@ bedroom_lights_day:
   sequence:
   - data:
       entity_id:
-      - light.osram_lightify_a19_rgbw_0007b483_3
-      - light.osram_lightify_a19_rgbw_0007b6b8_3
-      - light.osram_lightify_a19_rgbw_0007b8b2_3
-      - light.osram_lightify_a19_rgbw_00b00741_3
+      - light.osram_lightify_a19_rgbw_1
+      - light.osram_lightify_a19_rgbw_2
+      - light.osram_lightify_a19_rgbw_3
+      - light.osram_lightify_a19_rgbw_4
       rgb_color:
       - 252
       - 255

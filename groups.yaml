@@ -268,10 +268,10 @@ Bedroom Lights Group:
 #    - light.nightstand_bulb
 #    - light.desk_bulb
 #    - light.window_bulb
-    - light.osram_lightify_a19_rgbw
-    - light.osram_lightify_a19_rgbw
-    - light.osram_lightify_a19_rgbw
-    - light.osram_lightify_a19_rgbw
+    - light.osram_lightify_a19_rgbw_1
+    - light.osram_lightify_a19_rgbw_2
+    - light.osram_lightify_a19_rgbw_3
+    - light.osram_lightify_a19_rgbw_4
     - light.5ccf7f2a183e
 Bedroom Fan Group:
   name: Fan

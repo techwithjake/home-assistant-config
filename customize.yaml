@@ -167,13 +167,13 @@ input_boolean.lydia_presence:
   icon: mdi:home-map-marker
 input_boolean.jake_presence:
   icon: mdi:home-map-marker
-light.osram_lightify_a19_rgbw:
+light.osram_lightify_a19_rgbw_1:
   friendly_name: OSRAM 1
-light.osram_lightify_a19_rgbw:
+light.osram_lightify_a19_rgbw_2:
   friendly_name: OSRAM 2
-light.osram_lightify_a19_rgbw:
+light.osram_lightify_a19_rgbw_3:
   friendly_name: OSRAM 3
-light.osram_lightify_a19_rgbw:
+light.osram_lightify_a19_rgbw_4:
   friendly_name: OSRAM 4
 sensor.bathroom_motion_motion_sensor:
   friendly_name: Bathroom Motion Sensor
